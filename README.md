@@ -11,8 +11,8 @@
  - Is there anything you would do if you had more time? Let us know!
 
 ### Reference:
- - You will need to pass your API key with all requests. You can do this by passing `api_key=xyz` as a URL parameter, where `xyz` is the key.
  - If you are building for iOS 9, you may need to configure options for App Transport Security in order to load images returned by our API. See the Apple technote for details: https://developer.apple.com/library/prerelease/ios/technotes/App-Transport-Security-Technote/
- - Endpoint for Staff Picks: `https://8tracks.com/mix_sets/staff-picks.json?api_version=3&include=mixes[user]+pagination`
+ - Endpoint for Staff Picks: `https://8tracks.com/mix_sets/staff-picks.json?api_version=3&api_key={xyz}&include=mixes[user]+pagination`
+	 - Replace `{xyz}` with the API key that we will provide for you.
 	 - The best mix image to use is `cropped_imgix_url` in the `cover_urls` part of the response.
 	 - If want to try pagination, look at `next_page_path` in the JSON response as a starting point.
