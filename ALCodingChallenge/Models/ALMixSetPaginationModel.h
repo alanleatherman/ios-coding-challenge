@@ -8,4 +8,18 @@
 
 @interface ALMixSetPaginationModel : NSObject
 
+@property (nonatomic, assign, readonly) NSUInteger currentPage;
+@property (nonatomic, assign, readonly) NSUInteger mixesPerPage;
+@property (nonatomic, assign, readonly) NSUInteger previousPage;
+@property (nonatomic, assign, readonly) NSUInteger nextPage;
+@property (nonatomic, assign, readonly) NSUInteger totalPages;
+@property (nonatomic, copy, readonly)   NSString   *nextPagePath;
+
+- (instancetype)initMixSetPaginationModelWithCurrentPage:(NSUInteger)currentPage
+                                            mixesPerPage:(NSUInteger)mixesPerPage
+                                            previousPage:(NSUInteger)previousPage
+                                                nextPage:(NSUInteger)nextPage
+                                              totalPages:(NSUInteger)totalPages
+                                            nextPagePath:(NSString *)nextPagePath;
+
 @end
