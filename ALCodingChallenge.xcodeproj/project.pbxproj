@@ -17,6 +17,7 @@
 		1857C0B21BE304A100B256AF /* ALMixSetPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0B11BE304A100B256AF /* ALMixSetPageModel.m */; settings = {ASSET_TAGS = (); }; };
 		1857C0B51BE3057200B256AF /* ALMixModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0B41BE3057200B256AF /* ALMixModel.m */; settings = {ASSET_TAGS = (); }; };
 		1857C0B81BE305ED00B256AF /* ALMixSetPaginationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0B71BE305ED00B256AF /* ALMixSetPaginationModel.m */; settings = {ASSET_TAGS = (); }; };
+		55572BEC516A6BCA148CA5DD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7602DC6C2F8CB90C841A9EAE /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,9 @@
 		1857C0B41BE3057200B256AF /* ALMixModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALMixModel.m; path = Models/ALMixModel.m; sourceTree = "<group>"; };
 		1857C0B61BE305ED00B256AF /* ALMixSetPaginationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALMixSetPaginationModel.h; path = Models/ALMixSetPaginationModel.h; sourceTree = "<group>"; };
 		1857C0B71BE305ED00B256AF /* ALMixSetPaginationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALMixSetPaginationModel.m; path = Models/ALMixSetPaginationModel.m; sourceTree = "<group>"; };
+		69E105E6FAB783671FC50719 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7602DC6C2F8CB90C841A9EAE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A115F064CA85BE8CF1EA5FE5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55572BEC516A6BCA148CA5DD /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +62,8 @@
 			children = (
 				1857C0821BE0243000B256AF /* ALCodingChallenge */,
 				1857C0811BE0243000B256AF /* Products */,
+				466D7C18599C803F4E6E67D0 /* Pods */,
+				6C8941FBBD803688B7277564 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +132,23 @@
 			name = Networking;
 			sourceTree = "<group>";
 		};
+		466D7C18599C803F4E6E67D0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				69E105E6FAB783671FC50719 /* Pods.debug.xcconfig */,
+				A115F064CA85BE8CF1EA5FE5 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6C8941FBBD803688B7277564 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7602DC6C2F8CB90C841A9EAE /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +156,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1857C0971BE0243000B256AF /* Build configuration list for PBXNativeTarget "ALCodingChallenge" */;
 			buildPhases = (
+				A1865A4031ACECFE2EA0DF10 /* Check Pods Manifest.lock */,
 				1857C07C1BE0243000B256AF /* Sources */,
 				1857C07D1BE0243000B256AF /* Frameworks */,
 				1857C07E1BE0243000B256AF /* Resources */,
+				F1944F130E28DAFA3FE84166 /* Embed Pods Frameworks */,
+				291066EC9D3E51C3A0DF20D4 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,6 +216,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		291066EC9D3E51C3A0DF20D4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1865A4031ACECFE2EA0DF10 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F1944F130E28DAFA3FE84166 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1857C07C1BE0243000B256AF /* Sources */ = {
@@ -309,6 +384,7 @@
 		};
 		1857C0981BE0243000B256AF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69E105E6FAB783671FC50719 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ALCodingChallenge/ALCodingChallengePrefixHeader.pch";
@@ -322,6 +398,7 @@
 		};
 		1857C0991BE0243000B256AF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A115F064CA85BE8CF1EA5FE5 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ALCodingChallenge/ALCodingChallengePrefixHeader.pch";
