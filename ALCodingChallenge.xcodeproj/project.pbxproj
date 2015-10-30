@@ -1,0 +1,437 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1857C0851BE0243000B256AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0841BE0243000B256AF /* main.m */; };
+		1857C0881BE0243000B256AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0871BE0243000B256AF /* AppDelegate.m */; };
+		1857C08E1BE0243000B256AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1857C08C1BE0243000B256AF /* Main.storyboard */; };
+		1857C0901BE0243000B256AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1857C08F1BE0243000B256AF /* Assets.xcassets */; };
+		1857C0931BE0243000B256AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1857C0911BE0243000B256AF /* LaunchScreen.storyboard */; };
+		1857C0AC1BE2FBE900B256AF /* ALMixesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0AB1BE2FBE900B256AF /* ALMixesCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
+		1857C0AF1BE2FE4D00B256AF /* ALCodingChallengeNetworkFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0AE1BE2FE4D00B256AF /* ALCodingChallengeNetworkFetcher.m */; settings = {ASSET_TAGS = (); }; };
+		1857C0B21BE304A100B256AF /* ALMixSetPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0B11BE304A100B256AF /* ALMixSetPageModel.m */; settings = {ASSET_TAGS = (); }; };
+		1857C0B51BE3057200B256AF /* ALMixModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0B41BE3057200B256AF /* ALMixModel.m */; settings = {ASSET_TAGS = (); }; };
+		1857C0B81BE305ED00B256AF /* ALMixSetPaginationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0B71BE305ED00B256AF /* ALMixSetPaginationModel.m */; settings = {ASSET_TAGS = (); }; };
+		55572BEC516A6BCA148CA5DD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7602DC6C2F8CB90C841A9EAE /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1857C0801BE0243000B256AF /* ALCodingChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ALCodingChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1857C0841BE0243000B256AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1857C0861BE0243000B256AF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1857C0871BE0243000B256AF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1857C08D1BE0243000B256AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1857C08F1BE0243000B256AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1857C0921BE0243000B256AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1857C0941BE0243000B256AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1857C0A71BE2F9FA00B256AF /* ALCodingChallengePrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALCodingChallengePrefixHeader.pch; sourceTree = "<group>"; };
+		1857C0AA1BE2FBE900B256AF /* ALMixesCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALMixesCollectionViewController.h; path = ViewControllers/ALMixesCollectionViewController.h; sourceTree = "<group>"; };
+		1857C0AB1BE2FBE900B256AF /* ALMixesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALMixesCollectionViewController.m; path = ViewControllers/ALMixesCollectionViewController.m; sourceTree = "<group>"; };
+		1857C0AD1BE2FE4D00B256AF /* ALCodingChallengeNetworkFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALCodingChallengeNetworkFetcher.h; path = Networking/ALCodingChallengeNetworkFetcher.h; sourceTree = "<group>"; };
+		1857C0AE1BE2FE4D00B256AF /* ALCodingChallengeNetworkFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALCodingChallengeNetworkFetcher.m; path = Networking/ALCodingChallengeNetworkFetcher.m; sourceTree = "<group>"; };
+		1857C0B01BE304A100B256AF /* ALMixSetPageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALMixSetPageModel.h; path = Models/ALMixSetPageModel.h; sourceTree = "<group>"; };
+		1857C0B11BE304A100B256AF /* ALMixSetPageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALMixSetPageModel.m; path = Models/ALMixSetPageModel.m; sourceTree = "<group>"; };
+		1857C0B31BE3057200B256AF /* ALMixModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALMixModel.h; path = Models/ALMixModel.h; sourceTree = "<group>"; };
+		1857C0B41BE3057200B256AF /* ALMixModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALMixModel.m; path = Models/ALMixModel.m; sourceTree = "<group>"; };
+		1857C0B61BE305ED00B256AF /* ALMixSetPaginationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALMixSetPaginationModel.h; path = Models/ALMixSetPaginationModel.h; sourceTree = "<group>"; };
+		1857C0B71BE305ED00B256AF /* ALMixSetPaginationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALMixSetPaginationModel.m; path = Models/ALMixSetPaginationModel.m; sourceTree = "<group>"; };
+		69E105E6FAB783671FC50719 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7602DC6C2F8CB90C841A9EAE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A115F064CA85BE8CF1EA5FE5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1857C07D1BE0243000B256AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55572BEC516A6BCA148CA5DD /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1857C0771BE0242F00B256AF = {
+			isa = PBXGroup;
+			children = (
+				1857C0821BE0243000B256AF /* ALCodingChallenge */,
+				1857C0811BE0243000B256AF /* Products */,
+				466D7C18599C803F4E6E67D0 /* Pods */,
+				6C8941FBBD803688B7277564 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1857C0811BE0243000B256AF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1857C0801BE0243000B256AF /* ALCodingChallenge.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1857C0821BE0243000B256AF /* ALCodingChallenge */ = {
+			isa = PBXGroup;
+			children = (
+				1857C0A81BE2FA4700B256AF /* Networking */,
+				1857C09B1BE2A4FE00B256AF /* ViewControllers */,
+				1857C09A1BE2A4F800B256AF /* Models */,
+				1857C0861BE0243000B256AF /* AppDelegate.h */,
+				1857C0871BE0243000B256AF /* AppDelegate.m */,
+				1857C08C1BE0243000B256AF /* Main.storyboard */,
+				1857C08F1BE0243000B256AF /* Assets.xcassets */,
+				1857C0911BE0243000B256AF /* LaunchScreen.storyboard */,
+				1857C0941BE0243000B256AF /* Info.plist */,
+				1857C0831BE0243000B256AF /* Supporting Files */,
+			);
+			path = ALCodingChallenge;
+			sourceTree = "<group>";
+		};
+		1857C0831BE0243000B256AF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1857C0841BE0243000B256AF /* main.m */,
+				1857C0A71BE2F9FA00B256AF /* ALCodingChallengePrefixHeader.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1857C09A1BE2A4F800B256AF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1857C0B01BE304A100B256AF /* ALMixSetPageModel.h */,
+				1857C0B11BE304A100B256AF /* ALMixSetPageModel.m */,
+				1857C0B31BE3057200B256AF /* ALMixModel.h */,
+				1857C0B41BE3057200B256AF /* ALMixModel.m */,
+				1857C0B61BE305ED00B256AF /* ALMixSetPaginationModel.h */,
+				1857C0B71BE305ED00B256AF /* ALMixSetPaginationModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		1857C09B1BE2A4FE00B256AF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1857C0AA1BE2FBE900B256AF /* ALMixesCollectionViewController.h */,
+				1857C0AB1BE2FBE900B256AF /* ALMixesCollectionViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1857C0A81BE2FA4700B256AF /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				1857C0AD1BE2FE4D00B256AF /* ALCodingChallengeNetworkFetcher.h */,
+				1857C0AE1BE2FE4D00B256AF /* ALCodingChallengeNetworkFetcher.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		466D7C18599C803F4E6E67D0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				69E105E6FAB783671FC50719 /* Pods.debug.xcconfig */,
+				A115F064CA85BE8CF1EA5FE5 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6C8941FBBD803688B7277564 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7602DC6C2F8CB90C841A9EAE /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1857C07F1BE0243000B256AF /* ALCodingChallenge */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1857C0971BE0243000B256AF /* Build configuration list for PBXNativeTarget "ALCodingChallenge" */;
+			buildPhases = (
+				A1865A4031ACECFE2EA0DF10 /* Check Pods Manifest.lock */,
+				1857C07C1BE0243000B256AF /* Sources */,
+				1857C07D1BE0243000B256AF /* Frameworks */,
+				1857C07E1BE0243000B256AF /* Resources */,
+				F1944F130E28DAFA3FE84166 /* Embed Pods Frameworks */,
+				291066EC9D3E51C3A0DF20D4 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ALCodingChallenge;
+			productName = ALCodingChallenge;
+			productReference = 1857C0801BE0243000B256AF /* ALCodingChallenge.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1857C0781BE0242F00B256AF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Alan Leatherman";
+				TargetAttributes = {
+					1857C07F1BE0243000B256AF = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 1857C07B1BE0242F00B256AF /* Build configuration list for PBXProject "ALCodingChallenge" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1857C0771BE0242F00B256AF;
+			productRefGroup = 1857C0811BE0243000B256AF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1857C07F1BE0243000B256AF /* ALCodingChallenge */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1857C07E1BE0243000B256AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1857C0931BE0243000B256AF /* LaunchScreen.storyboard in Resources */,
+				1857C0901BE0243000B256AF /* Assets.xcassets in Resources */,
+				1857C08E1BE0243000B256AF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		291066EC9D3E51C3A0DF20D4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1865A4031ACECFE2EA0DF10 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F1944F130E28DAFA3FE84166 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1857C07C1BE0243000B256AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1857C0B21BE304A100B256AF /* ALMixSetPageModel.m in Sources */,
+				1857C0B51BE3057200B256AF /* ALMixModel.m in Sources */,
+				1857C0AC1BE2FBE900B256AF /* ALMixesCollectionViewController.m in Sources */,
+				1857C0B81BE305ED00B256AF /* ALMixSetPaginationModel.m in Sources */,
+				1857C0AF1BE2FE4D00B256AF /* ALCodingChallengeNetworkFetcher.m in Sources */,
+				1857C0881BE0243000B256AF /* AppDelegate.m in Sources */,
+				1857C0851BE0243000B256AF /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1857C08C1BE0243000B256AF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1857C08D1BE0243000B256AF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1857C0911BE0243000B256AF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1857C0921BE0243000B256AF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1857C0951BE0243000B256AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1857C0961BE0243000B256AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1857C0981BE0243000B256AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69E105E6FAB783671FC50719 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/ALCodingChallenge/ALCodingChallengePrefixHeader.pch";
+				INFOPLIST_FILE = ALCodingChallenge/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alanleatherman.ALCodingChallenge;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		1857C0991BE0243000B256AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A115F064CA85BE8CF1EA5FE5 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/ALCodingChallenge/ALCodingChallengePrefixHeader.pch";
+				INFOPLIST_FILE = ALCodingChallenge/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alanleatherman.ALCodingChallenge;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1857C07B1BE0242F00B256AF /* Build configuration list for PBXProject "ALCodingChallenge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1857C0951BE0243000B256AF /* Debug */,
+				1857C0961BE0243000B256AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1857C0971BE0243000B256AF /* Build configuration list for PBXNativeTarget "ALCodingChallenge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1857C0981BE0243000B256AF /* Debug */,
+				1857C0991BE0243000B256AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1857C0781BE0242F00B256AF /* Project object */;
+}
