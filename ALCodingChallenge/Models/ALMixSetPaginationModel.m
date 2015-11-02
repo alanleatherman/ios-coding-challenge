@@ -7,6 +7,7 @@
 //
 
 #import "ALMixSetPaginationModel.h"
+#import "ALCodingChallengeHelpers.h"
 
 @interface ALMixSetPaginationModel ()
 
@@ -43,11 +44,11 @@
 
 - (void)updateMixSetPaginationModelWithDictionary:(NSDictionary *)jsonDictionary {
     if (jsonDictionary.count > 0) {
-        self.currentPage = [jsonDictionary[@"current_page"] unsignedIntegerValue] ?: self.currentPage;
-        self.mixesPerPage = [jsonDictionary[@"per_page"] unsignedIntegerValue] ?: self.mixesPerPage;
-        self.previousPage = [jsonDictionary[@"previous_page"] unsignedIntegerValue] ?: self.previousPage;
-        self.nextPage = [jsonDictionary[@"next_page"] unsignedIntegerValue] ?: self.nextPage;
-        self.totalPages = [jsonDictionary[@"total_pages"] unsignedIntegerValue] ?: self.totalPages;
+        self.currentPage = [ALCodingChallengeHelpers isValidValue:jsonDictionary[@"current_page"]] ? [jsonDictionary[@"current_page"] unsignedIntegerValue] : self.currentPage;
+        self.mixesPerPage = [ALCodingChallengeHelpers isValidValue:jsonDictionary[@"per_page"]] ? [jsonDictionary[@"per_page"] unsignedIntegerValue] : self.mixesPerPage;
+        self.previousPage = [ALCodingChallengeHelpers isValidValue:jsonDictionary[@"previous_page"]] ? [jsonDictionary[@"previous_page"] unsignedIntegerValue] : self.previousPage;
+        self.nextPage = [ALCodingChallengeHelpers isValidValue:jsonDictionary[@"next_page"]] ? [jsonDictionary[@"next_page"] unsignedIntegerValue] : self.nextPage;
+        self.totalPages = [ALCodingChallengeHelpers isValidValue:jsonDictionary[@"total_pages"]] ? [jsonDictionary[@"total_pages"] unsignedIntegerValue] : self.totalPages;
         
         self.nextPagePath = jsonDictionary[@"next_page_path"] ?: self.nextPagePath;
     }
