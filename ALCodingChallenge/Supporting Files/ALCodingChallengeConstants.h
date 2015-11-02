@@ -6,4 +6,4 @@
 //  Copyright © 2015 Alan Leatherman. All rights reserved.
 //
 
-extern NSString * const mixesURL;
+extern NSString * const mixesURLString;

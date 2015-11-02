@@ -7,6 +7,8 @@
 //
 
 #import "ALMixesCollectionViewController.h"
+#import "ALCodingChallengeNetworkFetcher.h"
+#import "ALCodingChallengeConstants.h"
 
 @interface ALMixesCollectionViewController ()
 
@@ -16,7 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+    NSURL *mixesURL = [NSURL URLWithString:mixesURLString];
 }
 
 - (void)didReceiveMemoryWarning {
