@@ -37,6 +37,7 @@
         _mixId = mixId;
         _mixUserId = mixUserId;
         _mixName = mixName;
+        _mixPath = mixPath;
         _mixWebPath = mixWebPath;
         _mixImageLowResPath = lowResPath;
         _mixImageNormalResPath = normalResPath;

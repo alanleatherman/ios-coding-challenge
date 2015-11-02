@@ -18,6 +18,7 @@
 		1857C0B51BE3057200B256AF /* ALMixModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0B41BE3057200B256AF /* ALMixModel.m */; settings = {ASSET_TAGS = (); }; };
 		1857C0B81BE305ED00B256AF /* ALMixSetPaginationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0B71BE305ED00B256AF /* ALMixSetPaginationModel.m */; settings = {ASSET_TAGS = (); }; };
 		1857C0C31BE7D57600B256AF /* ALCodingChallengeConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0C21BE7D57600B256AF /* ALCodingChallengeConstants.m */; settings = {ASSET_TAGS = (); }; };
+		1857C0C71BE7E4AC00B256AF /* ALCodingChallengeHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0C61BE7E4AC00B256AF /* ALCodingChallengeHelpers.m */; settings = {ASSET_TAGS = (); }; };
 		55572BEC516A6BCA148CA5DD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7602DC6C2F8CB90C841A9EAE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,8 @@
 		1857C0C11BE7D57600B256AF /* ALCodingChallengeConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALCodingChallengeConstants.h; path = "Supporting Files/ALCodingChallengeConstants.h"; sourceTree = "<group>"; };
 		1857C0C21BE7D57600B256AF /* ALCodingChallengeConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALCodingChallengeConstants.m; path = "Supporting Files/ALCodingChallengeConstants.m"; sourceTree = "<group>"; };
 		1857C0C41BE7D62800B256AF /* ALCodingChallengePrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALCodingChallengePrefixHeader.pch; path = "Supporting Files/ALCodingChallengePrefixHeader.pch"; sourceTree = "<group>"; };
+		1857C0C51BE7E4AC00B256AF /* ALCodingChallengeHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALCodingChallengeHelpers.h; path = "Supporting Files/ALCodingChallengeHelpers.h"; sourceTree = "<group>"; };
+		1857C0C61BE7E4AC00B256AF /* ALCodingChallengeHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALCodingChallengeHelpers.m; path = "Supporting Files/ALCodingChallengeHelpers.m"; sourceTree = "<group>"; };
 		69E105E6FAB783671FC50719 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7602DC6C2F8CB90C841A9EAE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A115F064CA85BE8CF1EA5FE5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -102,6 +105,8 @@
 				1857C0C41BE7D62800B256AF /* ALCodingChallengePrefixHeader.pch */,
 				1857C0C11BE7D57600B256AF /* ALCodingChallengeConstants.h */,
 				1857C0C21BE7D57600B256AF /* ALCodingChallengeConstants.m */,
+				1857C0C51BE7E4AC00B256AF /* ALCodingChallengeHelpers.h */,
+				1857C0C61BE7E4AC00B256AF /* ALCodingChallengeHelpers.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 				1857C0AC1BE2FBE900B256AF /* ALMixesCollectionViewController.m in Sources */,
 				1857C0B81BE305ED00B256AF /* ALMixSetPaginationModel.m in Sources */,
 				1857C0AF1BE2FE4D00B256AF /* ALCodingChallengeNetworkFetcher.m in Sources */,
+				1857C0C71BE7E4AC00B256AF /* ALCodingChallengeHelpers.m in Sources */,
 				1857C0881BE0243000B256AF /* AppDelegate.m in Sources */,
 				1857C0851BE0243000B256AF /* main.m in Sources */,
 			);
