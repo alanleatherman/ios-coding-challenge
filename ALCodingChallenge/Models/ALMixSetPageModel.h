@@ -13,12 +13,15 @@
 @property (nonatomic, copy, readonly)   NSArray *mixSetArray;
 @property (nonatomic, copy, readonly)   NSString *mixSetName;
 @property (nonatomic, copy, readonly)   NSString *mixSetPath;
+@property (nonatomic, copy, readonly)   NSString *mixSetWebPath;
 @property (nonatomic, copy, readonly)   ALMixSetPaginationModel *paginationModel;
 @property (nonatomic, assign, readonly) BOOL isLoggedIn;
 
++ (ALMixSetPageModel *)mixSetPageModelWithDictionary:(NSDictionary *)jsonDictionary;
 - (instancetype)initMixSetPageModelWithMixSetArray:(NSArray *)mixSets
                                         mixSetName:(NSString *)name
                                         mixSetPath:(NSString *)path
+                                     mixSetWebPath:(NSString *)webPath
                                    paginationModel:(ALMixSetPaginationModel *)pagination
                                         isLoggedIn:(BOOL)loggedIn;
 

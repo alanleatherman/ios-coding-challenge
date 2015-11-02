@@ -21,5 +21,6 @@
                                                 nextPage:(NSUInteger)nextPage
                                               totalPages:(NSUInteger)totalPages
                                             nextPagePath:(NSString *)nextPagePath;
+- (void)updateMixSetPaginationModelWithDictionary:(NSDictionary *)jsonDictionary;
 
 @end

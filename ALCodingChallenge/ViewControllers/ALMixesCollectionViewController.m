@@ -7,8 +7,13 @@
 //
 
 #import "ALMixesCollectionViewController.h"
+#import "ALCodingChallengeNetworkFetcher.h"
+#import "ALCodingChallengeConstants.h"
+#import "ALMixSetPageModel.h"
 
 @interface ALMixesCollectionViewController ()
+
+@property (nonatomic, strong) ALMixSetPageModel *pageModel;
 
 @end
 
@@ -16,12 +21,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSURL *mixesURL = [NSURL URLWithString:mixesURLString];
+    
+    ALCodingChallengeNetworkFetcher *sharedFetcher = [ALCodingChallengeNetworkFetcher sharedNetworkFetcher];
+    
+    [sharedFetcher initializeRequestWithURL:mixesURL
+                                 httpMethod:@"GET"
+                                 parameters:nil
+                           withSuccessBlock:^(NSDictionary *jsonDictionary) {
+                               if (!self.pageModel && jsonDictionary.count > 0) {
+                                   self.pageModel = [ALMixSetPageModel mixSetPageModelWithDictionary:jsonDictionary];
+                                   
+                               }
+                           }
+                           withFailureBlock:^(NSError *error) {
+                               NSLog(@"There was an error retrieving mixes data");
+                           }
+     ];
 }
 
 @end
