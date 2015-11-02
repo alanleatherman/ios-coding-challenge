@@ -22,6 +22,5 @@
                                         mixSetPath:(NSString *)path
                                    paginationModel:(ALMixSetPaginationModel *)pagination
                                         isLoggedIn:(BOOL)loggedIn;
-- (void)updateMixSetPageModelWithDictionary:(NSDictionary *)jsonDictionary;
 
 @end
