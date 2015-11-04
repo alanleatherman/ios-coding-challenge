@@ -32,7 +32,6 @@
                            withSuccessBlock:^(NSDictionary *jsonDictionary) {
                                if (!self.pageModel && jsonDictionary.count > 0) {
                                    self.pageModel = [ALMixSetPageModel mixSetPageModelWithDictionary:jsonDictionary];
-                                   
                                }
                            }
                            withFailureBlock:^(NSError *error) {
