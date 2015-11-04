@@ -35,7 +35,7 @@
         
         _screenSize = [[UIScreen mainScreen] bounds].size;
         
-        _centerCellRect = CGRectMake(_screenSize.width - (kCellWidth + (kCellWidth * .25)),
+        _centerCellRect = CGRectMake((_screenSize.width - kCellWidth) / 2,
                                      _screenSize.height / 4,
                                      kCellWidth,
                                      kCellHeight);
