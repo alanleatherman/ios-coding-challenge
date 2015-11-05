@@ -18,9 +18,6 @@
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
-#define kDefaultBlurEffectViewConstraint 55.f
-#define kLoadPagePercentToScroll 0.13f
-
 
 @interface ALMixesCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
@@ -41,6 +38,7 @@
 
 @property (nonatomic, assign) NSTimeInterval centerCellSelectTime;
 @property (nonatomic, assign) BOOL isSelectingCenterCell;
+@property (nonatomic, assign) BOOL hasSetFinalNavigationBar;
 
 - (ALMixCollectionViewCell *)getMixCellForCurrentCenterIndexPath;
 
@@ -58,14 +56,16 @@
     
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"ALCodingChallenge", @"Navigation Title for Mixes CollectionVC");
     self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : kMixSetNavigationTextColor}];
     
-    self.navigationController.view.backgroundColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.f];
+    self.navigationController.navigationBar.barTintColor = kMixSetNavigationBackgroundColor;
+    self.navigationController.view.backgroundColor = kDefaultMixSetNavigationBackgroundViewColor;
     
     self.collectionView.backgroundView.backgroundColor = [UIColor clearColor];
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressedCollectionView:)];
-    longPressGesture.minimumPressDuration = .2;
+    longPressGesture.minimumPressDuration = kLongPressDuration;
     [self.collectionView addGestureRecognizer:longPressGesture];
     
     self.flowLayout = [[ALMixesCollectionViewFlowLayout alloc] init];
@@ -130,6 +130,8 @@
     
     ALMixCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
                                                                               forIndexPath:indexPath];
+    cell.layer.shouldRasterize = YES;
+    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     ALMixModel *model = self.pageModel.mixSetArray[indexPath.row];
     
@@ -185,7 +187,7 @@
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
         [UIView animateWithDuration:1 delay:0.0 usingSpringWithDamping:.8 initialSpringVelocity:.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            cell.transform = CGAffineTransformMakeScale(2, 2);
+            cell.transform = CGAffineTransformMakeScale(1.5, 1.5);
             cell.authorLabel.alpha = 0.0f;
             cell.nameLabel.alpha = 0.0f;
         } completion:^(BOOL finished) {
@@ -230,8 +232,10 @@
     
     NSLog(@"Percent To Scroll: %f", percentToScroll);
     
-    self.navigationController.view.backgroundColor = [UIColor colorWithRed:percentToScroll green:percentToScroll blue:percentToScroll alpha:1.f * percentToScroll];
-    
+    [UIView animateWithDuration:0.2f animations:^{
+        self.navigationController.view.backgroundColor = [UIColor colorWithRed:percentToScroll green:percentToScroll blue:percentToScroll alpha:1.f * percentToScroll];
+    }];
+        
     if (self.isUpdatingPagination == NO && percentToScroll < kLoadPagePercentToScroll) {
         [self fetchNextPage];
         self.isUpdatingPagination = YES;
