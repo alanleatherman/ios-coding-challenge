@@ -139,6 +139,10 @@
     self.blurEffectViewTopConstraint.constant = constraintValue;
     self.blurEffectViewBottomConstraint.constant = constraintValue;
     
+    
+    if (percentToScroll < 0.05) {
+        // Load next page
+    }
 }
 
 #pragma mark - Alert Controller Helper method
