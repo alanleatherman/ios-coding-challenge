@@ -9,5 +9,6 @@
 @interface ALCodingChallengeHelpers : NSObject
 
 + (BOOL)isValidValue:(id)value;
++ (void)displayAlertWithTitle:(NSString *)title message:(NSString *)message viewController:(UIViewController *)vc;
 
 @end

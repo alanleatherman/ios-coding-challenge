@@ -302,13 +302,22 @@
                                     </mask>
                                 </variation>
                             </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play_button" translatesAutoresizingMaskIntoConstraints="NO" id="FED-Su-uAs">
+                                <rect key="frame" x="263" y="194" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="Agf-qo-Sna"/>
+                                    <constraint firstAttribute="height" constant="75" id="EY8-4J-YPF"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Uda-aY-ZcR" firstAttribute="top" secondItem="dF8-9V-h7a" secondAttribute="top" id="4s8-3i-wYU"/>
                             <constraint firstAttribute="trailing" secondItem="Hfh-qd-vWK" secondAttribute="trailing" id="5IU-hs-UCu"/>
                             <constraint firstItem="Uda-aY-ZcR" firstAttribute="leading" secondItem="Hfh-qd-vWK" secondAttribute="leading" id="7K2-dT-2FZ"/>
+                            <constraint firstItem="FED-Su-uAs" firstAttribute="centerX" secondItem="fDw-Tq-23X" secondAttribute="centerX" id="DXL-UR-zwa"/>
                             <constraint firstItem="dF8-9V-h7a" firstAttribute="top" secondItem="qsE-pZ-LHs" secondAttribute="top" id="IKq-HM-Lh2"/>
+                            <constraint firstItem="FED-Su-uAs" firstAttribute="centerY" secondItem="fDw-Tq-23X" secondAttribute="centerY" id="JPn-56-TJX"/>
                             <constraint firstItem="dF8-9V-h7a" firstAttribute="leading" secondItem="qsE-pZ-LHs" secondAttribute="leading" id="LGM-Ys-eBX"/>
                             <constraint firstItem="9nI-1e-h7B" firstAttribute="bottom" secondItem="fDw-Tq-23X" secondAttribute="bottom" constant="150" id="P6a-dC-GXV"/>
                             <constraint firstAttribute="trailing" secondItem="dF8-9V-h7a" secondAttribute="trailing" id="SUP-W9-Oi3"/>
@@ -332,6 +341,7 @@
                         <outlet property="mixDescriptionLabel" destination="TTd-6R-nvd" id="Ku8-qW-PYe"/>
                         <outlet property="mixDescriptionTextView" destination="orl-4T-L2E" id="cxt-Wg-ks4"/>
                         <outlet property="mixImageView" destination="fDw-Tq-23X" id="EAQ-gy-Tzn"/>
+                        <outlet property="playButtonImageView" destination="FED-Su-uAs" id="K5t-pO-5yl"/>
                         <outlet property="userImageView" destination="9nI-1e-h7B" id="5J9-8Z-clz"/>
                     </connections>
                 </viewController>
@@ -359,5 +369,6 @@
     </scenes>
     <resources>
         <image name="Funkoscope" width="558" height="603"/>
+        <image name="play_button" width="250" height="250"/>
     </resources>
 </document>

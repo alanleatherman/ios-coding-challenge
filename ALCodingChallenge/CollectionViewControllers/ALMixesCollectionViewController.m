@@ -9,6 +9,7 @@
 #import "ALMixesCollectionViewController.h"
 #import "ALCodingChallengeNetworkFetcher.h"
 #import "ALCodingChallengeConstants.h"
+#import "ALCodingChallengeHelpers.h"
 #import "ALMixCollectionViewCell.h"
 #import "ALMixesCollectionViewFlowLayout.h"
 #import "ALMixDetailViewController.h"
@@ -58,31 +59,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"ALCodingChallenge", @"Navigation Title for Mixes CollectionVC");
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : kMixSetNavigationTextColor}];
-    self.navigationController.navigationBar.barTintColor = kMixSetNavigationBackgroundColor;
-    self.navigationController.view.backgroundColor = kDefaultMixSetNavigationBackgroundViewColor;
-    
-    // Hides Back button text for when user goes to detail page
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                             style:self.navigationItem.backBarButtonItem.style
-                                                                            target:nil
-                                                                            action:nil];
-
-    self.collectionView.backgroundView.backgroundColor = [UIColor clearColor];
-    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
-    
-    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressedCollectionView:)];
-    longPressGesture.minimumPressDuration = kLongPressDuration;
-    [self.collectionView addGestureRecognizer:longPressGesture];
-    
-    self.flowLayout = [[ALMixesCollectionViewFlowLayout alloc] init];
-    [self.collectionView setCollectionViewLayout:self.flowLayout
-                                        animated:YES];
-    
-    self.transition = [[ZoomInteractiveTransition alloc] initWithNavigationController:self.navigationController];
+    [self setUpNavigationController];
+    [self setUpCollectionView];
     
     self.userImageView.clipsToBounds = YES;
     
@@ -93,7 +71,7 @@
     NSURL *mixesURL = [NSURL URLWithString:mixesURLString];
     
     [self.activityIndicatorView startAnimating];
-    
+
     ALCodingChallengeNetworkFetcher *sharedFetcher = [ALCodingChallengeNetworkFetcher sharedNetworkFetcher];
     
     [sharedFetcher initializeRequestWithURL:mixesURL
@@ -121,16 +99,53 @@
                                        [self.collectionView reloadData];
                                    });
                                } else {
-                                   [self displayAlertWithTitle:NSLocalizedString(@"Error", nil)
-                                                       message:NSLocalizedString(@"There was an error fetching data for the coding challenge, please try again", @"Network error message")];
+                                   [ALCodingChallengeHelpers displayAlertWithTitle:NSLocalizedString(@"Error", nil)
+                                                                           message:NSLocalizedString(@"There was an error fetching data for the coding challenge, please try again", @"Network error message")
+                                                                    viewController:self];
                                }
                            }
                            withFailureBlock:^(NSError *error) {
-                               [self displayAlertWithTitle:NSLocalizedString(@"Error", nil)
-                                                   message:NSLocalizedString(@"There was an error fetching data for the coding challenge, please try again", @"Network error message")];
+                               [ALCodingChallengeHelpers displayAlertWithTitle:NSLocalizedString(@"Error", nil)
+                                                                       message:NSLocalizedString(@"There was an error fetching data for the coding challenge, please try again", @"Network error message")
+                                                                    viewController:self];
                            }
      ];
 }
+
+#pragma mark - Set Up helper methods
+
+- (void)setUpNavigationController {
+    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"ALCodingChallenge", @"Navigation Title for Mixes CollectionVC");
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : kMixSetNavigationTextColor}];
+    self.navigationController.navigationBar.barTintColor = kMixSetNavigationBackgroundColor;
+    self.navigationController.view.backgroundColor = kDefaultMixSetNavigationBackgroundViewColor;
+    
+    // Hides Back button text for when user goes to detail page
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                             style:self.navigationItem.backBarButtonItem.style
+                                                                            target:nil
+                                                                            action:nil];
+}
+
+- (void)setUpCollectionView {
+    self.collectionView.backgroundView.backgroundColor = [UIColor clearColor];
+    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+    
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressedCollectionView:)];
+    longPressGesture.minimumPressDuration = kLongPressDuration;
+    [self.collectionView addGestureRecognizer:longPressGesture];
+    
+    self.flowLayout = [[ALMixesCollectionViewFlowLayout alloc] init];
+    [self.collectionView setCollectionViewLayout:self.flowLayout
+                                        animated:YES];
+    
+    self.transition = [[ZoomInteractiveTransition alloc] initWithNavigationController:self.navigationController];
+}
+
+
+#pragma mark - UICollectionViewDelegate methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.flowLayout.cellCount ?: 0;
@@ -174,8 +189,19 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Selected %@", indexPath);
-}
+    // This animation is here to let the user know they must hold down to view details
+    ALMixCollectionViewCell *cell = [self getMixCellForCurrentCenterIndexPath];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:kShortPressCenterCellAnimationDuration delay:0.0 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
+            cell.transform = CGAffineTransformMakeScale(kShortPressCenterCellMaxScale, kShortPressCenterCellMaxScale);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:kShortPressCenterCellAnimationDuration delay:0.0 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
+                cell.transform = CGAffineTransformMakeScale(1, 1);
+            } completion:^(BOOL finished) {
+            }];
+        }];
+    });}
 
 #pragma mark - Collection View Helper Methods
 
@@ -206,7 +232,7 @@
                                                                     userInfo:nil
                                                                      repeats:NO];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [UIView animateWithDuration:0.5 delay:0.0 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
+            [UIView animateWithDuration:kSpringDefaultInitialVelocity delay:0.0 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
                 cell.transform = CGAffineTransformMakeScale(kLongPressCenterCellMaxScale, kLongPressCenterCellMaxScale);
                 cell.authorLabel.alpha = 0.0f;
                 cell.nameLabel.alpha = 0.0f;
@@ -299,34 +325,18 @@
                                            [self.collectionView reloadData];
                                        });
                                    } else {
-                                       [self displayAlertWithTitle:NSLocalizedString(@"Error", nil)
-                                                           message:NSLocalizedString(@"There was an error fetching data for the coding challenge, please try again", @"Network error message")];
+                                       [ALCodingChallengeHelpers displayAlertWithTitle:NSLocalizedString(@"Error", nil)
+                                                                               message:NSLocalizedString(@"There was an error fetching data for the coding challenge, please try again", @"Network error message")
+                                                                        viewController:self];
                                    }
                                }
                                withFailureBlock:^(NSError *error) {
-                                   [self displayAlertWithTitle:NSLocalizedString(@"Error", nil)
-                                                       message:NSLocalizedString(@"There was an error fetching data for the coding challenge, please try again", @"Network error message")];
+                                   [ALCodingChallengeHelpers displayAlertWithTitle:NSLocalizedString(@"Error", nil)
+                                                                           message:NSLocalizedString(@"There was an error fetching data for the coding challenge, please try again", @"Network error message")
+                                                                    viewController:self];
                                }
          ];
     }
-}
-
-#pragma mark - Alert Controller Helper method
-
-- (void)displayAlertWithTitle:(NSString *)title message:(NSString *)message {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
-                                                                       message:message
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okButton = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * action) {
-                                                             [alert dismissViewControllerAnimated:YES completion:nil];
-                                                         }];
-        [alert addAction:okButton];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-    });
 }
 
 #pragma mark - Navigation Methods
@@ -341,7 +351,7 @@
     [mixDetailVC initilizeWithMixModel:mixModel];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:0.5 delay:0.0 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:kSpringDefaultInitialVelocity delay:0.0 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
             self.userImageView.alpha = 0.2f;
         } completion:^(BOOL finished) {
             self.userImageView.alpha = 1.0f;

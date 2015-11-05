@@ -10,6 +10,7 @@
 #import "ALMixModel.h"
 #import "ALUserModel.h"
 #import "ALCodingChallengeConstants.h"
+#import "ALCodingChallengeHelpers.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <ZoomInteractiveTransition/ZoomInteractiveTransition.h>
@@ -18,6 +19,7 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *userImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *playButtonImageView;
 @property (nonatomic, weak) IBOutlet UIVisualEffectView *blurEffectView;
 
 @property (nonatomic, weak) IBOutlet UITextView *mixDescriptionTextView;
@@ -47,7 +49,8 @@
     self.title = [self.mixModel.mixName stringByReplacingOccurrencesOfString:@" " withString:@""];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    //self.navigationController.navigationBar.topItem.title = @"";
+    UITapGestureRecognizer *playTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedPlayButton)];
+    [self.playButtonImageView addGestureRecognizer:playTapGesture];
     
     [self.mixImageView sd_setImageWithURL:[NSURL URLWithString:self.mixModel.mixImageNormalResPath] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
@@ -74,15 +77,28 @@
     });
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Tap Gesture Methods
+
+- (void)tappedPlayButton {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:kMixDetailPlayAnimationDuration delay:0.0 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.playButtonImageView.transform = CGAffineTransformMakeScale(kShortPressCenterCellMaxScale, kShortPressCenterCellMaxScale);
+        } completion:^(BOOL finished) {
+            [ALCodingChallengeHelpers displayAlertWithTitle:NSLocalizedString(@"Not Yet!", @"Not Yet")
+                                                    message:NSLocalizedString(@"This feature is not built out for this coding challenge, maybe in the future!", @"Unbuilt feature message")
+                                             viewController:self];
+            
+            [UIView animateWithDuration:kAnimationDefaultDuration delay:0.0 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
+                self.playButtonImageView.transform = CGAffineTransformMakeScale(1, 1);
+            } completion:^(BOOL finished) {
+            }];
+        }];
+    });
 }
 
 #pragma mark - ZoomTransitionProtocol
 
--(UIView *)viewForZoomTransition:(BOOL)isSource
-{
+-(UIView *)viewForZoomTransition:(BOOL)isSource {
     return self.mixImageView;
 }
 
