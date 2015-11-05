@@ -54,4 +54,12 @@
     }
 }
 
+- (void)updateMixSetPaginationModelWithCurrentPage:(NSUInteger)currentPage
+                                      previousPage:(NSUInteger)previousPage
+                                          nextPage:(NSUInteger)nextPage {
+    self.currentPage = currentPage;
+    self.previousPage = previousPage;
+    self.nextPage = nextPage;
+}
+
 @end
