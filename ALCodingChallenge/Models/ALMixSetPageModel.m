@@ -9,6 +9,7 @@
 #import "ALMixSetPageModel.h"
 #import "ALMixModel.h"
 #import "ALMixSetPaginationModel.h"
+#import "ALUserModel.h"
 #import "ALCodingChallengeHelpers.h"
 
 @interface ALMixSetPageModel ()
@@ -43,12 +44,15 @@
             mixSetWebPath = mixSetDictionary[@"web_path"] ?: @"";
             
             NSDictionary *mixDictionary = mixSetDictionary[@"mixes"];
+            mixSetsArray = [[NSMutableArray alloc] initWithCapacity:mixDictionary.count];
             
             ALMixModel *mixModel;
-            mixSetsArray = [[NSMutableArray alloc] initWithCapacity:mixDictionary.count];
-            NSDictionary *userDictionary, *mixCoverURLsDictionary;
+            ALUserModel *userModel;
+            
+            NSDictionary *userDictionary, *userMixCoverURLsDictionary, *mixCoverURLsDictionary;
             NSUInteger mixId, mixUserId = 0;
             NSString *mixName, *mixPath, *mixWebPath, *mixImageLowResPath, *mixImageNormalResPath, *mixImageHighResPath;
+            NSString *userName, *userPath, *userWebPath, *userLowResPath, *userNormalResPath, *userHighResPath;
             
             for (NSDictionary *mix in mixDictionary) {
                 userDictionary = mix[@"user"];
@@ -56,6 +60,22 @@
                 if (userDictionary.count > 0) {
                     // Use helper method to check if valid value before calling unsignedIntegerValue (will crash if null)
                     mixUserId = [ALCodingChallengeHelpers isValidValue:userDictionary[@"id"]] ? [userDictionary[@"id"] unsignedIntegerValue] : 0;
+                    userName = userDictionary[@"login"] ?: @"";
+                    userPath = userDictionary[@"path"] ?: @"";
+                    userWebPath = userDictionary[@"web_path"] ?: @"";
+                    
+                    userMixCoverURLsDictionary = userDictionary[@"avatar_urls"];
+                    userLowResPath = userMixCoverURLsDictionary[@"sq100"] ?: @"";
+                    userNormalResPath = userMixCoverURLsDictionary[@"cropped_imgix_url"] ?: @"";
+                    userHighResPath = userMixCoverURLsDictionary[@"max1024"] ?: @"";
+                    
+                    userModel = [[ALUserModel alloc] initUserModelWithUserId:mixUserId
+                                                                    userName:userName
+                                                                    userPath:userPath
+                                                                 userWebPath:userWebPath
+                                                                  lowResPath:userLowResPath
+                                                               normalResPath:userNormalResPath
+                                                                 highResPath:userHighResPath];
                 }
                 
                 mixId = [ALCodingChallengeHelpers isValidValue:mix[@"id"]] ? [mix[@"id"] unsignedIntegerValue] : 0;
@@ -73,7 +93,7 @@
                 
                 
                 mixModel = [[ALMixModel alloc] initMixModelWithId:mixId
-                                                        mixUserid:mixUserId
+                                                     mixUserModel:userModel
                                                           mixName:mixName
                                                           mixPath:mixPath
                                                        mixWebPath:mixWebPath

@@ -21,6 +21,7 @@
 		1857C0CF1BEAD83400B256AF /* ALMixesCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0CE1BEAD83400B256AF /* ALMixesCollectionViewFlowLayout.m */; settings = {ASSET_TAGS = (); }; };
 		1857C0D21BEAD86F00B256AF /* ALMixCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0D11BEAD86F00B256AF /* ALMixCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		1857C0D51BEAD89000B256AF /* ALMixesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0D41BEAD89000B256AF /* ALMixesCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
+		1857C0D81BEAF73000B256AF /* ALUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0D71BEAF73000B256AF /* ALUserModel.m */; settings = {ASSET_TAGS = (); }; };
 		55572BEC516A6BCA148CA5DD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7602DC6C2F8CB90C841A9EAE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,8 @@
 		1857C0D11BEAD86F00B256AF /* ALMixCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALMixCollectionViewCell.m; path = CollectionViewControllerCells/ALMixCollectionViewCell.m; sourceTree = "<group>"; };
 		1857C0D31BEAD89000B256AF /* ALMixesCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALMixesCollectionViewController.h; path = CollectionViewControllers/ALMixesCollectionViewController.h; sourceTree = "<group>"; };
 		1857C0D41BEAD89000B256AF /* ALMixesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALMixesCollectionViewController.m; path = CollectionViewControllers/ALMixesCollectionViewController.m; sourceTree = "<group>"; };
+		1857C0D61BEAF73000B256AF /* ALUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALUserModel.h; path = Models/ALUserModel.h; sourceTree = "<group>"; };
+		1857C0D71BEAF73000B256AF /* ALUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALUserModel.m; path = Models/ALUserModel.m; sourceTree = "<group>"; };
 		69E105E6FAB783671FC50719 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7602DC6C2F8CB90C841A9EAE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A115F064CA85BE8CF1EA5FE5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +131,8 @@
 				1857C0B41BE3057200B256AF /* ALMixModel.m */,
 				1857C0B61BE305ED00B256AF /* ALMixSetPaginationModel.h */,
 				1857C0B71BE305ED00B256AF /* ALMixSetPaginationModel.m */,
+				1857C0D61BEAF73000B256AF /* ALUserModel.h */,
+				1857C0D71BEAF73000B256AF /* ALUserModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 				1857C0D51BEAD89000B256AF /* ALMixesCollectionViewController.m in Sources */,
 				1857C0B51BE3057200B256AF /* ALMixModel.m in Sources */,
 				1857C0CF1BEAD83400B256AF /* ALMixesCollectionViewFlowLayout.m in Sources */,
+				1857C0D81BEAF73000B256AF /* ALUserModel.m in Sources */,
 				1857C0B81BE305ED00B256AF /* ALMixSetPaginationModel.m in Sources */,
 				1857C0AF1BE2FE4D00B256AF /* ALCodingChallengeNetworkFetcher.m in Sources */,
 				1857C0C71BE7E4AC00B256AF /* ALCodingChallengeHelpers.m in Sources */,

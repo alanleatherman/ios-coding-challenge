@@ -11,7 +11,7 @@
 @interface ALMixModel ()
 
 @property (nonatomic, assign) NSUInteger mixId;
-@property (nonatomic, assign) NSUInteger mixUserId;
+@property (nonatomic, strong) ALUserModel *mixUserModel;;
 @property (nonatomic, copy)   NSString *mixName;
 @property (nonatomic, copy)   NSString *mixPath;
 @property (nonatomic, copy)   NSString *mixWebPath;
@@ -24,7 +24,7 @@
 @implementation ALMixModel
 
 - (instancetype)initMixModelWithId:(NSUInteger)mixId
-                         mixUserid:(NSUInteger)mixUserId
+                      mixUserModel:(ALUserModel *)mixUserModel
                            mixName:(NSString *)mixName
                            mixPath:(NSString *)mixPath
                         mixWebPath:(NSString *)mixWebPath
@@ -35,7 +35,7 @@
     
     if (self) {
         _mixId = mixId;
-        _mixUserId = mixUserId;
+        _mixUserModel = mixUserModel;
         _mixName = mixName;
         _mixPath = mixPath;
         _mixWebPath = mixWebPath;

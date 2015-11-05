@@ -6,10 +6,12 @@
 //  Copyright © 2015 Alan Leatherman. All rights reserved.
 //
 
+@class ALUserModel;
+
 @interface ALMixModel : NSObject
 
 @property (nonatomic, assign, readonly) NSUInteger mixId;
-@property (nonatomic, assign, readonly) NSUInteger mixUserId;
+@property (nonatomic, strong, readonly) ALUserModel *mixUserModel;
 @property (nonatomic, copy, readonly)   NSString *mixName;
 @property (nonatomic, copy, readonly)   NSString *mixPath;
 @property (nonatomic, copy, readonly)   NSString *mixWebPath;
@@ -18,7 +20,7 @@
 @property (nonatomic, copy, readonly)   NSString *mixImageHighResPath;
 
 - (instancetype)initMixModelWithId:(NSUInteger)mixId
-                         mixUserid:(NSUInteger)mixUserId
+                      mixUserModel:(ALUserModel *)mixUserModel
                            mixName:(NSString *)mixName
                            mixPath:(NSString *)mixPath
                         mixWebPath:(NSString *)mixWebPath

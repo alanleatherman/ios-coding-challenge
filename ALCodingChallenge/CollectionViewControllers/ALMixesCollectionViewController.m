@@ -9,15 +9,18 @@
 #import "ALMixesCollectionViewController.h"
 #import "ALCodingChallengeNetworkFetcher.h"
 #import "ALCodingChallengeConstants.h"
+#import "ALMixCollectionViewCell.h"
 #import "ALMixesCollectionViewFlowLayout.h"
+#import "ALMixModel.h"
 #import "ALMixSetPageModel.h"
+#import "ALUserModel.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #define kDefaultBlurEffectViewConstraint 55.f
 
 
-@interface ALMixesCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate>
+@interface ALMixesCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UIVisualEffectView *blurEffectView;
@@ -32,6 +35,11 @@
 @end
 
 @implementation ALMixesCollectionViewController
+
+- (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {
+    
+    return [self initialLayoutAttributesForAppearingItemAtIndexPath:itemIndexPath];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -87,15 +95,24 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    //static NSString *reuseIdentifier = @"TopicCollectionViewCell";
-    //TopicCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
-    //forIndexPath:indexPath];
+    static NSString *reuseIdentifier = @"MixCell";
     
-    static NSString *reuseIdentifier = @"ColorCell";
+    ALMixCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
+                                                                              forIndexPath:indexPath];
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
-                                                                           forIndexPath:indexPath];
+    ALMixModel *model = self.pageModel.mixSetArray[indexPath.row];
     
+    if (model) {
+        cell.authorLabel.text = model.mixUserModel.userName;
+        cell.nameLabel.text = model.mixName;
+        
+        [cell.activityIndicatorView startAnimating];
+        [cell.mixImageView sd_setImageWithURL:[NSURL URLWithString:model.mixImageNormalResPath] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [cell.activityIndicatorView stopAnimating];
+        }];
+    }
+    
+    /*
     NSInteger colorInteger = arc4random_uniform(4);
     if (colorInteger == 0) {
         cell.backgroundColor = [UIColor blueColor];
@@ -106,6 +123,7 @@
     } else {
         cell.backgroundColor = [UIColor yellowColor];
     }
+     */
     
     return cell;
 }
