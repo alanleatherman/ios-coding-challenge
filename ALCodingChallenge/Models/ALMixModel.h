@@ -19,6 +19,7 @@
 @property (nonatomic, copy, readonly)   NSString *mixImageNormalResPath;
 @property (nonatomic, copy, readonly)   NSString *mixImageHighResPath;
 
++ (ALMixModel *)createMixModelWithDictionary:(NSDictionary *)mixDictionary;
 - (instancetype)initMixModelWithId:(NSUInteger)mixId
                       mixUserModel:(ALUserModel *)mixUserModel
                            mixName:(NSString *)mixName

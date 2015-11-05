@@ -119,7 +119,7 @@
 }
 
 - (CGSize)collectionViewContentSize {
-    return CGSizeMake((self.cellCount * self.itemSize.width) + (kCellWidth * 1.5), self.collectionView.frame.size.height);
+    return CGSizeMake((self.cellCount * self.itemSize.width) - self.centerCellRect.origin.x, self.collectionView.frame.size.height);
 }
 
 - (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {

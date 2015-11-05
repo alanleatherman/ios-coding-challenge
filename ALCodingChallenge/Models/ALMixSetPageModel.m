@@ -47,59 +47,10 @@
             mixSetsArray = [[NSMutableArray alloc] initWithCapacity:mixDictionary.count];
             
             ALMixModel *mixModel;
-            ALUserModel *userModel;
-            
-            NSDictionary *userDictionary, *userMixCoverURLsDictionary, *mixCoverURLsDictionary;
-            NSUInteger mixId, mixUserId = 0;
-            NSString *mixName, *mixPath, *mixWebPath, *mixImageLowResPath, *mixImageNormalResPath, *mixImageHighResPath;
-            NSString *userName, *userPath, *userWebPath, *userLowResPath, *userNormalResPath, *userHighResPath;
             
             for (NSDictionary *mix in mixDictionary) {
-                userDictionary = mix[@"user"];
+                mixModel = [ALMixModel createMixModelWithDictionary:mix];
                 
-                if (userDictionary.count > 0) {
-                    // Use helper method to check if valid value before calling unsignedIntegerValue (will crash if null)
-                    mixUserId = [ALCodingChallengeHelpers isValidValue:userDictionary[@"id"]] ? [userDictionary[@"id"] unsignedIntegerValue] : 0;
-                    userName = userDictionary[@"login"] ?: @"";
-                    userPath = userDictionary[@"path"] ?: @"";
-                    userWebPath = userDictionary[@"web_path"] ?: @"";
-                    
-                    userMixCoverURLsDictionary = userDictionary[@"avatar_urls"];
-                    userLowResPath = userMixCoverURLsDictionary[@"sq100"] ?: @"";
-                    userNormalResPath = userMixCoverURLsDictionary[@"cropped_imgix_url"] ?: @"";
-                    userHighResPath = userMixCoverURLsDictionary[@"max1024"] ?: @"";
-                    
-                    userModel = [[ALUserModel alloc] initUserModelWithUserId:mixUserId
-                                                                    userName:userName
-                                                                    userPath:userPath
-                                                                 userWebPath:userWebPath
-                                                                  lowResPath:userLowResPath
-                                                               normalResPath:userNormalResPath
-                                                                 highResPath:userHighResPath];
-                }
-                
-                mixId = [ALCodingChallengeHelpers isValidValue:mix[@"id"]] ? [mix[@"id"] unsignedIntegerValue] : 0;
-                mixName = mix[@"name"] ?: @"";
-                mixPath = mix[@"path"] ?: @"";
-                mixWebPath = mix[@"web_path"] ?: @"";
-                
-                mixCoverURLsDictionary =  mix[@"cover_urls"];
-                
-                if (mixCoverURLsDictionary.count > 0) {
-                    mixImageLowResPath = mixCoverURLsDictionary[@"sq100"] ?: @"";
-                    mixImageNormalResPath = mixCoverURLsDictionary[@"cropped_imgix_url"] ?: @"";
-                    mixImageHighResPath = mixCoverURLsDictionary[@"max1024"] ?: @"";
-                }
-                
-                
-                mixModel = [[ALMixModel alloc] initMixModelWithId:mixId
-                                                     mixUserModel:userModel
-                                                          mixName:mixName
-                                                          mixPath:mixPath
-                                                       mixWebPath:mixWebPath
-                                               mixImageLowResPath:mixImageLowResPath
-                                            mixImageNormalResPath:mixImageNormalResPath
-                                              mixImageHighResPath:mixImageHighResPath];
                 [mixSetsArray addObject:mixModel];
             }
         
@@ -128,7 +79,7 @@
         }
     }
     
-    pageModel = [[ALMixSetPageModel alloc] initMixSetPageModelWithMixSetArray:mixSetsArray
+    pageModel = [[ALMixSetPageModel alloc] initMixSetPageModelWithMixSetArray:[mixSetsArray copy]
                                                                    mixSetName:mixSetName
                                                                    mixSetPath:mixSetPath
                                                                 mixSetWebPath:mixSetWebPath
@@ -158,7 +109,33 @@
     return self;
 }
 
+
 - (void)updateMixSetPageModelWithDictionary:(NSDictionary *)jsonDictionary {
+    NSArray *mixes = jsonDictionary[@"mixes"];
+    NSMutableArray *mixSetsArray;
+    
+    if (mixes.count > 0) {
+        mixSetsArray = [[NSMutableArray alloc] initWithArray:self.mixSetArray];
+        ALMixModel *mixModel;
+        
+        for (NSDictionary *mix in mixes) {
+            mixModel = [ALMixModel createMixModelWithDictionary:mix];
+            [mixSetsArray addObject:mixModel];
+        }
+        
+        self.mixSetArray = [mixSetsArray copy];
+    }
+    
+    NSUInteger currentPage, nextPage, previousPage;
+    
+    currentPage = [ALCodingChallengeHelpers isValidValue:jsonDictionary[@"page"]] ? [jsonDictionary[@"page"] unsignedIntegerValue] : 0;
+    nextPage = [ALCodingChallengeHelpers isValidValue:jsonDictionary[@"next_page"]] ? [jsonDictionary[@"next_page"] unsignedIntegerValue] : 0;
+    previousPage = [ALCodingChallengeHelpers isValidValue:jsonDictionary[@"previous_page"]] ? [jsonDictionary[@"previous_page"] unsignedIntegerValue] : 0;
+
+    [self.paginationModel updateMixSetPaginationModelWithCurrentPage:currentPage
+                                                        previousPage:previousPage
+                                                            nextPage:nextPage];
+    
 }
 
 @end

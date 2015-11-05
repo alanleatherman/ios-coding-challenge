@@ -12,18 +12,21 @@
 #import "ALMixCollectionViewCell.h"
 #import "ALMixesCollectionViewFlowLayout.h"
 #import "ALMixModel.h"
+#import "ALMixSetPaginationModel.h"
 #import "ALMixSetPageModel.h"
 #import "ALUserModel.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #define kDefaultBlurEffectViewConstraint 55.f
+#define kLoadPagePercentToScroll 0.13f
 
 
 @interface ALMixesCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *userImageView;
 @property (nonatomic, weak) IBOutlet UIVisualEffectView *blurEffectView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, weak) ALMixCollectionViewCell *centerMixCell;
@@ -53,6 +56,8 @@
     self.flowLayout = [[ALMixesCollectionViewFlowLayout alloc] init];
     [self.collectionView setCollectionViewLayout:self.flowLayout
                                         animated:YES];
+    
+    self.userImageView.clipsToBounds = YES;
 
     NSURL *mixesURL = [NSURL URLWithString:mixesURLString];
     
@@ -76,6 +81,7 @@
 
                                    dispatch_async(dispatch_get_main_queue(), ^{
                                        [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixImageNormalResPath]];
+                                       [self.userImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixUserModel.userImageNormalResPath]];
                                        
                                        [self.collectionView reloadData];
                                    });
@@ -164,6 +170,7 @@
         ALMixModel *mixModel = self.pageModel.mixSetArray[centerIndexPath.row];
         self.centerMixCell = centerCell;
         [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixImageNormalResPath]];
+        [self.userImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixUserModel.userImageNormalResPath]];
     }
     
     
@@ -174,8 +181,51 @@
     self.blurEffectViewTopConstraint.constant = constraintValue;
     self.blurEffectViewBottomConstraint.constant = constraintValue;
     
-    if (percentToScroll < 0.05) {
-        // Load next page
+    NSLog(@"Percent To Scroll: %f", percentToScroll);
+    
+    if (percentToScroll < kLoadPagePercentToScroll) {
+        [self fetchNextPage];
+    }
+}
+
+#pragma mark - Pagination Request Method
+
+- (void)fetchNextPage {
+    if (self.pageModel.paginationModel.nextPage <= self.pageModel.paginationModel.totalPages) {
+        NSString *nextPageIntegerString = [NSString stringWithFormat:@"%li", self.pageModel.paginationModel.nextPage];
+        NSString *nextPageString = [paginationMixesURLString stringByReplacingOccurrencesOfString:@"%li" withString:nextPageIntegerString];
+        NSURL *nextPageURL = [NSURL URLWithString:nextPageString];
+        
+        [self.activityIndicatorView startAnimating];
+        
+        ALCodingChallengeNetworkFetcher *sharedFetcher = [ALCodingChallengeNetworkFetcher sharedNetworkFetcher];
+        
+        [sharedFetcher initializeRequestWithURL:nextPageURL
+                                     httpMethod:@"GET"
+                                     parameters:nil
+                               withSuccessBlock:^(NSDictionary *jsonDictionary) {
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       [self.activityIndicatorView stopAnimating];
+                                       self.activityIndicatorView.hidden = YES;
+                                   });
+                                   
+                                   if (jsonDictionary.count > 0) {
+                                       [self.pageModel updateMixSetPageModelWithDictionary:jsonDictionary];
+                                       self.flowLayout.cellCount = self.pageModel.mixSetArray.count;
+                                       
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           [self.collectionView reloadData];
+                                       });
+                                   } else {
+                                       [self displayAlertWithTitle:NSLocalizedString(@"Error", nil)
+                                                           message:NSLocalizedString(@"There was an error fetching data for the coding challenge, please try again", @"Network error message")];
+                                   }
+                               }
+                               withFailureBlock:^(NSError *error) {
+                                   [self displayAlertWithTitle:NSLocalizedString(@"Error", nil)
+                                                       message:NSLocalizedString(@"There was an error fetching data for the coding challenge, please try again", @"Network error message")];
+                               }
+         ];
     }
 }
 

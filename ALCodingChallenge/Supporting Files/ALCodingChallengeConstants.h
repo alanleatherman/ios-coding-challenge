@@ -7,3 +7,5 @@
 //
 
 extern NSString * const mixesURLString;
+extern NSString * const baseURLString;
+extern NSString * const paginationMixesURLString;
