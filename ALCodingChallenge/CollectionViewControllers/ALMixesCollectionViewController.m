@@ -17,11 +17,11 @@
 #import "ALMixSetPaginationModel.h"
 #import "ALMixSetPageModel.h"
 #import "ALUserModel.h"
+#import "ALZoomInteractiveTransition.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <ZoomInteractiveTransition/ZoomInteractiveTransition.h>
 
-@interface ALMixesCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, ZoomTransitionProtocol>
+@interface ALMixesCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, ALZoomTransitionProtocol>
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
@@ -40,7 +40,7 @@
 @property (nonatomic, assign) BOOL isUpdatingPagination;
 
 @property (nonatomic, weak) ALMixDetailViewController *toMixDetailVC;
-@property (nonatomic, strong) ZoomInteractiveTransition *transition;
+@property (nonatomic, strong) ALZoomInteractiveTransition *transition;
 @property (nonatomic, strong) NSTimer *centerCellSelectTimer;
 @property (nonatomic, assign) BOOL isSelectingCenterCell;
 @property (nonatomic, assign) BOOL hasSetFinalNavigationBar;
@@ -141,7 +141,7 @@
     [self.collectionView setCollectionViewLayout:self.flowLayout
                                         animated:YES];
     
-    self.transition = [[ZoomInteractiveTransition alloc] initWithNavigationController:self.navigationController];
+    self.transition = [[ALZoomInteractiveTransition alloc] initWithNavigationController:self.navigationController];
 }
 
 

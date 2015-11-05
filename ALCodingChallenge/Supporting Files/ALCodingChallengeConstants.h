@@ -24,6 +24,8 @@
 #define kSpringDefaultInitialVelocity .8
 #define kAnimationDefaultDuration 0.5
 
+#define kZoomTransitionDuration 0.3
+
 extern NSString * const mixesURLString;
 extern NSString * const baseURLString;
 extern NSString * const paginationMixesURLString;

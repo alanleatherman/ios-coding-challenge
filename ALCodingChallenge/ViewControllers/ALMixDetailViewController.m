@@ -11,11 +11,11 @@
 #import "ALUserModel.h"
 #import "ALCodingChallengeConstants.h"
 #import "ALCodingChallengeHelpers.h"
+#import "ALZoomInteractiveTransition.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <ZoomInteractiveTransition/ZoomInteractiveTransition.h>
 
-@interface ALMixDetailViewController () <ZoomTransitionProtocol>
+@interface ALMixDetailViewController () <ALZoomTransitionProtocol>
 
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *userImageView;

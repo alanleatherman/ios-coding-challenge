@@ -23,6 +23,8 @@
 		1857C0D51BEAD89000B256AF /* ALMixesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0D41BEAD89000B256AF /* ALMixesCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		1857C0D81BEAF73000B256AF /* ALUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0D71BEAF73000B256AF /* ALUserModel.m */; settings = {ASSET_TAGS = (); }; };
 		1891710D1BEBD4B9009B6FC4 /* ALMixDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891710C1BEBD4B9009B6FC4 /* ALMixDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		18B6FD8B1BEC029F008FC36C /* ALZoomInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FD8A1BEC029F008FC36C /* ALZoomInteractiveTransition.m */; settings = {ASSET_TAGS = (); }; };
+		18B6FD8E1BEC0410008FC36C /* UIView+Snapshotting.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6FD8D1BEC0410008FC36C /* UIView+Snapshotting.m */; settings = {ASSET_TAGS = (); }; };
 		55572BEC516A6BCA148CA5DD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7602DC6C2F8CB90C841A9EAE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +60,10 @@
 		1857C0D71BEAF73000B256AF /* ALUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALUserModel.m; path = Models/ALUserModel.m; sourceTree = "<group>"; };
 		1891710B1BEBD4B9009B6FC4 /* ALMixDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALMixDetailViewController.h; path = ViewControllers/ALMixDetailViewController.h; sourceTree = "<group>"; };
 		1891710C1BEBD4B9009B6FC4 /* ALMixDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALMixDetailViewController.m; path = ViewControllers/ALMixDetailViewController.m; sourceTree = "<group>"; };
+		18B6FD891BEC029F008FC36C /* ALZoomInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALZoomInteractiveTransition.h; path = "Interactive Transition/ALZoomInteractiveTransition.h"; sourceTree = "<group>"; };
+		18B6FD8A1BEC029F008FC36C /* ALZoomInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALZoomInteractiveTransition.m; path = "Interactive Transition/ALZoomInteractiveTransition.m"; sourceTree = "<group>"; };
+		18B6FD8C1BEC0410008FC36C /* UIView+Snapshotting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Snapshotting.h"; path = "Interactive Transition/UIView+Snapshotting.h"; sourceTree = "<group>"; };
+		18B6FD8D1BEC0410008FC36C /* UIView+Snapshotting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Snapshotting.m"; path = "Interactive Transition/UIView+Snapshotting.m"; sourceTree = "<group>"; };
 		69E105E6FAB783671FC50719 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7602DC6C2F8CB90C841A9EAE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A115F064CA85BE8CF1EA5FE5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -190,6 +196,10 @@
 		18B6FD881BEBE596008FC36C /* InteractiveTransition */ = {
 			isa = PBXGroup;
 			children = (
+				18B6FD891BEC029F008FC36C /* ALZoomInteractiveTransition.h */,
+				18B6FD8A1BEC029F008FC36C /* ALZoomInteractiveTransition.m */,
+				18B6FD8C1BEC0410008FC36C /* UIView+Snapshotting.h */,
+				18B6FD8D1BEC0410008FC36C /* UIView+Snapshotting.m */,
 			);
 			name = InteractiveTransition;
 			sourceTree = "<group>";
@@ -335,6 +345,7 @@
 				1857C0C31BE7D57600B256AF /* ALCodingChallengeConstants.m in Sources */,
 				1891710D1BEBD4B9009B6FC4 /* ALMixDetailViewController.m in Sources */,
 				1857C0B21BE304A100B256AF /* ALMixSetPageModel.m in Sources */,
+				18B6FD8B1BEC029F008FC36C /* ALZoomInteractiveTransition.m in Sources */,
 				1857C0D51BEAD89000B256AF /* ALMixesCollectionViewController.m in Sources */,
 				1857C0B51BE3057200B256AF /* ALMixModel.m in Sources */,
 				1857C0CF1BEAD83400B256AF /* ALMixesCollectionViewFlowLayout.m in Sources */,
@@ -342,6 +353,7 @@
 				1857C0B81BE305ED00B256AF /* ALMixSetPaginationModel.m in Sources */,
 				1857C0AF1BE2FE4D00B256AF /* ALCodingChallengeNetworkFetcher.m in Sources */,
 				1857C0C71BE7E4AC00B256AF /* ALCodingChallengeHelpers.m in Sources */,
+				18B6FD8E1BEC0410008FC36C /* UIView+Snapshotting.m in Sources */,
 				1857C0D21BEAD86F00B256AF /* ALMixCollectionViewCell.m in Sources */,
 				1857C0881BE0243000B256AF /* AppDelegate.m in Sources */,
 				1857C0851BE0243000B256AF /* main.m in Sources */,
