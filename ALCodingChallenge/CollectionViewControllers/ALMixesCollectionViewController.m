@@ -258,8 +258,6 @@
 #pragma mark - ScrollViewDelegate methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"Scrolled: %@ of ContentSize: %@", NSStringFromCGPoint(scrollView.contentOffset), NSStringFromCGSize(scrollView.contentSize));
-    
     NSIndexPath *centerIndexPath = [self getIndexPathForCenterMixCell];
     ALMixCollectionViewCell *centerCell = [self getMixCellForCurrentCenterIndexPath];
     
@@ -282,8 +280,6 @@
     
     self.blurEffectViewTopConstraint.constant = constraintValue;
     self.blurEffectViewBottomConstraint.constant = constraintValue;
-    
-    NSLog(@"Percent To Scroll: %f", percentToScroll);
     
     [UIView animateWithDuration:kMixSetNavigationBarBackgroundColorAnimationDuration animations:^{
         self.navigationController.view.backgroundColor = [UIColor colorWithRed:percentToScroll green:percentToScroll blue:percentToScroll alpha:1.f * percentToScroll];
@@ -343,12 +339,12 @@
 
 - (void)pushCenterCellDetailVC {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ALMixDetailViewController *mixDetailVC = (ALMixDetailViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"MixDetailVC"];
+    self.toMixDetailVC = (ALMixDetailViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"MixDetailVC"];
     
     NSIndexPath *centerIndexPath = [self getIndexPathForCenterMixCell];
     ALMixModel *mixModel = self.pageModel.mixSetArray[centerIndexPath.row];
     
-    [mixDetailVC initilizeWithMixModel:mixModel];
+    [self.toMixDetailVC initilizeWithMixModel:mixModel];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:kSpringDefaultInitialVelocity delay:0.0 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -359,7 +355,7 @@
     });
     
     //[self presentViewController:mixDetailVC animated:YES completion:nil];
-    [self.navigationController pushViewController:mixDetailVC animated:YES];
+    [self.navigationController pushViewController:self.toMixDetailVC animated:YES];
 }
 
 

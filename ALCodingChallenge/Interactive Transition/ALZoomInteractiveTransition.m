@@ -17,6 +17,7 @@
 @property (nonatomic, assign) UINavigationControllerOperation operation;
 @property (nonatomic, assign) BOOL shouldCompleteTransition;
 @property (nonatomic, assign, getter = isInteractive) BOOL interactive;
+@property (nonatomic, assign) BOOL setXValueToOtherView;
 
 @end
 
@@ -57,15 +58,20 @@
 
 - (UIImageView *)initialZoomSnapshotFromView:(UIView *)sourceView
                             destinationView:(UIView *)destinationView {
-    UIImage * fromSnapshot = [sourceView dt_takeSnapshot];
-    UIImage * toSnapshot = [destinationView dt_takeSnapshot];
+    UIImage *fromSnapshot = [sourceView dt_takeSnapshot];
+    UIImage *toSnapshot = [destinationView dt_takeSnapshot];
     
-    UIImage * animateSnapshot = toSnapshot;
-    if (fromSnapshot.size.width>toSnapshot.size.width) {
+    UIImage *animateSnapshot = toSnapshot;
+    if (fromSnapshot.size.width < toSnapshot.size.width) {
         animateSnapshot = fromSnapshot;
     }
     UIImageView * sourceImageView = [[UIImageView alloc] initWithImage:animateSnapshot];
-    sourceImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    if (animateSnapshot == toSnapshot) {
+        self.setXValueToOtherView = YES;
+    }
+    
+    sourceImageView.contentMode = UIViewContentModeScaleAspectFill;
     
     return sourceImageView;
 }
@@ -91,7 +97,6 @@
     
     animatingImageView.frame = [zoomFromView.superview convertRect:zoomFromView.frame
                                                             toView:containerView];
-    
     fromView.alpha = 1;
     toView.alpha = 0;
     zoomFromView.alpha = 0;
@@ -119,7 +124,7 @@
                                   toView.alpha = 1;
                                   
                                   if (animationBlock) {
-                                      animationBlock(animatingImageView,zoomFromView,zoomToView);
+                                      animationBlock(animatingImageView, zoomFromView, zoomToView);
                                   }
                               } completion:^(BOOL finished) {
                                   if ([transitionContext transitionWasCancelled]) {
@@ -137,7 +142,7 @@
 
 #pragma mark - edge back gesture handling
 
-- (void) handleEdgePan:(UIScreenEdgePanGestureRecognizer *)gr {
+- (void)handleEdgePan:(UIScreenEdgePanGestureRecognizer *)gr {
     CGPoint point = [gr translationInView:gr.view];
     
     switch (gr.state) {

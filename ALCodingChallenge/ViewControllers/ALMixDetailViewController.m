@@ -34,11 +34,6 @@
 @implementation ALMixDetailViewController
 
 - (void)initilizeWithMixModel:(ALMixModel *)mixModel {
-    /*
-    [self.mixImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixImageNormalResPath] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    
-    }];
-    */
     self.mixModel = mixModel;
 }
 
@@ -63,7 +58,7 @@
     self.mixDescriptionTextView.text = self.mixModel.mixDescription;
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:1 delay:0.5 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:kMixDetailDefaultAnimationDuration delay:kAnimationDefaultDelay usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
             self.userImageView.alpha = 1.0f;
             CGFloat yTranslation = (self.mixImageView.frame.origin.y + self.mixImageView.frame.size.height) - self.userImageView.frame.origin.y - (CGRectGetHeight(self.userImageView.frame) / 2);
             CGFloat xTranslation = ([[UIScreen mainScreen] bounds].size.width / 2) - 50.f;
@@ -72,6 +67,24 @@
             
             self.mixAuthorLabel.alpha = 1.0f;
             self.mixDescriptionTextView.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+        }];
+    });
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:kMixDetailDefaultAnimationDuration delay:kAnimationDefaultDelay usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.userImageView.alpha = 1.0f;
+            CGFloat yTranslation = -(self.mixImageView.frame.origin.y + self.mixImageView.frame.size.height) + self.userImageView.frame.origin.y + (CGRectGetHeight(self.userImageView.frame) / 2);
+            CGFloat xTranslation = -([[UIScreen mainScreen] bounds].size.width / 2) + 50.f;
+            
+            self.userImageView.transform = CGAffineTransformMakeTranslation(xTranslation, yTranslation);
+            
+            self.mixAuthorLabel.alpha = 0.0f;
+            self.mixDescriptionTextView.alpha = 0.0f;
         } completion:^(BOOL finished) {
         }];
     });
