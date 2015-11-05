@@ -156,6 +156,7 @@
                     <navigationItem key="navigationItem" id="QGr-IH-Ivk"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="1G1-Oe-55s" id="iUf-cn-G0J"/>
+                        <outlet property="backgroundImageView" destination="tX7-12-dPp" id="VJX-QW-nhK"/>
                         <outlet property="blurEffectView" destination="geO-19-QZi" id="fzr-cd-Oxk"/>
                         <outlet property="blurEffectViewBottomConstraint" destination="n1A-wV-9Tr" id="I9r-Pw-Wou"/>
                         <outlet property="blurEffectViewTopConstraint" destination="11H-cW-p0U" id="zkH-5P-9kL"/>

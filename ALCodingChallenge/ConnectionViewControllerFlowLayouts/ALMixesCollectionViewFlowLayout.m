@@ -65,7 +65,9 @@
         }
     }
     
-    return CGPointMake(proposedContentOffset.x + offsetAdjustment, proposedContentOffset.y);
+    CGPoint finalPoint = CGPointMake(proposedContentOffset.x + offsetAdjustment, proposedContentOffset.y);
+    
+    return finalPoint;
 }
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {

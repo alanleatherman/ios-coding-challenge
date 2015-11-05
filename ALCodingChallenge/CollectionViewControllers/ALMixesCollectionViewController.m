@@ -23,8 +23,10 @@
 @interface ALMixesCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, weak) IBOutlet UIVisualEffectView *blurEffectView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, weak) ALMixCollectionViewCell *centerMixCell;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *blurEffectViewTopConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *blurEffectViewBottomConstraint;
@@ -70,8 +72,11 @@
                                if (!self.pageModel && jsonDictionary.count > 0) {
                                    self.pageModel = [ALMixSetPageModel mixSetPageModelWithDictionary:jsonDictionary];
                                    self.flowLayout.cellCount = self.pageModel.mixSetArray.count;
-                                   
+                                   ALMixModel *mixModel = self.pageModel.mixSetArray[0];
+
                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                       [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixImageNormalResPath]];
+                                       
                                        [self.collectionView reloadData];
                                    });
                                } else {
@@ -150,13 +155,24 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     NSLog(@"Scrolled: %@ of ContentSize: %@", NSStringFromCGPoint(scrollView.contentOffset), NSStringFromCGSize(scrollView.contentSize));
     
+    CGPoint centerPoint = CGPointMake(self.flowLayout.screenSize.width / 2 + scrollView.contentOffset.x, self.flowLayout.screenSize.width / 2 + scrollView.contentOffset.y);
+    NSIndexPath *centerIndexPath = [self.collectionView indexPathForItemAtPoint:centerPoint];
+    ALMixCollectionViewCell *centerCell = (ALMixCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:centerIndexPath];
+    
+    // Dont set for 0 because will set when retrieving data model initially
+    if (self.centerMixCell != centerCell && centerIndexPath != 0) {
+        ALMixModel *mixModel = self.pageModel.mixSetArray[centerIndexPath.row];
+        self.centerMixCell = centerCell;
+        [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixImageNormalResPath]];
+    }
+    
+    
     CGFloat percentScrolled = scrollView.contentOffset.x / scrollView.contentSize.width;
     CGFloat percentToScroll = 1 - percentScrolled;
     CGFloat constraintValue = kDefaultBlurEffectViewConstraint * percentToScroll;
     
     self.blurEffectViewTopConstraint.constant = constraintValue;
     self.blurEffectViewBottomConstraint.constant = constraintValue;
-    
     
     if (percentToScroll < 0.05) {
         // Load next page
