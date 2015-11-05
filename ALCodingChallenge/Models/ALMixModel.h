@@ -13,6 +13,7 @@
 @property (nonatomic, assign, readonly) NSUInteger mixId;
 @property (nonatomic, strong, readonly) ALUserModel *mixUserModel;
 @property (nonatomic, copy, readonly)   NSString *mixName;
+@property (nonatomic, copy, readonly)   NSString *mixDescription;
 @property (nonatomic, copy, readonly)   NSString *mixPath;
 @property (nonatomic, copy, readonly)   NSString *mixWebPath;
 @property (nonatomic, copy, readonly)   NSString *mixImageLowResPath;
@@ -23,6 +24,7 @@
 - (instancetype)initMixModelWithId:(NSUInteger)mixId
                       mixUserModel:(ALUserModel *)mixUserModel
                            mixName:(NSString *)mixName
+                    mixDescription:(NSString *)mixDescription
                            mixPath:(NSString *)mixPath
                         mixWebPath:(NSString *)mixWebPath
                 mixImageLowResPath:(NSString *)lowResPath
