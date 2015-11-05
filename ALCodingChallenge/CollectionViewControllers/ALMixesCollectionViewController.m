@@ -11,15 +11,16 @@
 #import "ALCodingChallengeConstants.h"
 #import "ALMixCollectionViewCell.h"
 #import "ALMixesCollectionViewFlowLayout.h"
+#import "ALMixDetailViewController.h"
 #import "ALMixModel.h"
 #import "ALMixSetPaginationModel.h"
 #import "ALMixSetPageModel.h"
 #import "ALUserModel.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <ZoomInteractiveTransition/ZoomInteractiveTransition.h>
 
-
-@interface ALMixesCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface ALMixesCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, ZoomTransitionProtocol>
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
@@ -37,7 +38,9 @@
 @property (nonatomic, strong) ALMixSetPageModel *pageModel;
 @property (nonatomic, assign) BOOL isUpdatingPagination;
 
-@property (nonatomic, assign) NSTimeInterval centerCellSelectTime;
+@property (nonatomic, weak) ALMixDetailViewController *toMixDetailVC;
+@property (nonatomic, strong) ZoomInteractiveTransition *transition;
+@property (nonatomic, strong) NSTimer *centerCellSelectTimer;
 @property (nonatomic, assign) BOOL isSelectingCenterCell;
 @property (nonatomic, assign) BOOL hasSetFinalNavigationBar;
 
@@ -57,11 +60,17 @@
     
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"ALCodingChallenge", @"Navigation Title for Mixes CollectionVC");
     self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : kMixSetNavigationTextColor}];
-    
     self.navigationController.navigationBar.barTintColor = kMixSetNavigationBackgroundColor;
     self.navigationController.view.backgroundColor = kDefaultMixSetNavigationBackgroundViewColor;
     
+    // Hides Back button text for when user goes to detail page
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                             style:self.navigationItem.backBarButtonItem.style
+                                                                            target:nil
+                                                                            action:nil];
+
     self.collectionView.backgroundView.backgroundColor = [UIColor clearColor];
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     
@@ -73,10 +82,11 @@
     [self.collectionView setCollectionViewLayout:self.flowLayout
                                         animated:YES];
     
-    self.centerCellSelectTime = 0.0f;
+    self.transition = [[ZoomInteractiveTransition alloc] initWithNavigationController:self.navigationController];
+    
     self.userImageView.clipsToBounds = YES;
     
-    if (self.flowLayout.screenSize.height <= 667) {
+    if (self.flowLayout.screenSize.height < 667) {
         self.userImageBottomConstraint.constant = self.userImageBottomConstraint.constant + kUserImageSmallScreenBottomConstraint;
     }
 
@@ -187,24 +197,35 @@
 
 - (void)longPressedCollectionView:(UILongPressGestureRecognizer *)gesture {
     ALMixCollectionViewCell *cell = [self getMixCellForCurrentCenterIndexPath];
-    NSIndexPath *centerPath = [self getIndexPathForCenterMixCell];
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        [UIView animateWithDuration:1 delay:0.0 usingSpringWithDamping:.8 initialSpringVelocity:.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            cell.transform = CGAffineTransformMakeScale(kLongPressCenterCellMaxScale, kLongPressCenterCellMaxScale);
-            cell.authorLabel.alpha = 0.0f;
-            cell.nameLabel.alpha = 0.0f;
-            cell.layer.zPosition = 1.f;
-        } completion:^(BOOL finished) {
-        }];
+        // Push to detail VC if user keeps tap down long enough
+        self.centerCellSelectTimer = [NSTimer scheduledTimerWithTimeInterval:.5
+                                                                      target:self
+                                                                    selector:@selector(pushCenterCellDetailVC)
+                                                                    userInfo:nil
+                                                                     repeats:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.5 delay:0.0 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
+                cell.transform = CGAffineTransformMakeScale(kLongPressCenterCellMaxScale, kLongPressCenterCellMaxScale);
+                cell.authorLabel.alpha = 0.0f;
+                cell.nameLabel.alpha = 0.0f;
+                cell.layer.zPosition = 1.f;
+            } completion:^(BOOL finished) {
+            }];
+        });
     } else if (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled) {
-        [UIView animateWithDuration:0.2 delay:0.0 usingSpringWithDamping:.8 initialSpringVelocity:.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            cell.transform = CGAffineTransformMakeScale(1, 1);
-            cell.authorLabel.alpha = 1.0f;
-            cell.nameLabel.alpha = 1.0f;
-            cell.layer.zPosition = 0.f;
-        } completion:^(BOOL finished) {
-        }];
+        [self.centerCellSelectTimer invalidate];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.1 delay:0.0 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
+                cell.transform = CGAffineTransformMakeScale(1, 1);
+                cell.authorLabel.alpha = 1.0f;
+                cell.nameLabel.alpha = 1.0f;
+                cell.layer.zPosition = 0.f;
+            } completion:^(BOOL finished) {
+            }];
+        });
     }
 }
 
@@ -252,7 +273,7 @@
 
 - (void)fetchNextPage {
     if (self.pageModel.paginationModel.nextPage <= self.pageModel.paginationModel.totalPages) {
-        NSString *nextPageIntegerString = [NSString stringWithFormat:@"%li", self.pageModel.paginationModel.nextPage];
+        NSString *nextPageIntegerString = [NSString stringWithFormat:@"%li", (unsigned long)self.pageModel.paginationModel.nextPage];
         NSString *nextPageString = [paginationMixesURLString stringByReplacingOccurrencesOfString:@"%li" withString:nextPageIntegerString];
         NSURL *nextPageURL = [NSURL URLWithString:nextPageString];
         
@@ -306,6 +327,39 @@
         
         [self presentViewController:alert animated:YES completion:nil];
     });
+}
+
+#pragma mark - Navigation Methods
+
+- (void)pushCenterCellDetailVC {
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ALMixDetailViewController *mixDetailVC = (ALMixDetailViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"MixDetailVC"];
+    
+    NSIndexPath *centerIndexPath = [self getIndexPathForCenterMixCell];
+    ALMixModel *mixModel = self.pageModel.mixSetArray[centerIndexPath.row];
+    
+    [mixDetailVC initilizeWithMixModel:mixModel];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.5 delay:0.0 usingSpringWithDamping:kSpringDefaultDamping initialSpringVelocity:kSpringDefaultInitialVelocity options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.userImageView.alpha = 0.2f;
+        } completion:^(BOOL finished) {
+            self.userImageView.alpha = 1.0f;
+        }];
+    });
+    
+    //[self presentViewController:mixDetailVC animated:YES completion:nil];
+    [self.navigationController pushViewController:mixDetailVC animated:YES];
+}
+
+
+
+#pragma mark - ZoomTransitionProtocol
+
+- (UIView *)viewForZoomTransition:(BOOL)isSource {
+    ALMixCollectionViewCell *cell = [self getMixCellForCurrentCenterIndexPath];
+    
+    return cell.mixImageView;
 }
 
 @end

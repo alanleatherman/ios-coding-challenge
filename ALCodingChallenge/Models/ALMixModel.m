@@ -16,6 +16,7 @@
 @property (nonatomic, assign) NSUInteger mixId;
 @property (nonatomic, strong) ALUserModel *mixUserModel;;
 @property (nonatomic, copy)   NSString *mixName;
+@property (nonatomic, copy)   NSString *mixDescription;
 @property (nonatomic, copy)   NSString *mixPath;
 @property (nonatomic, copy)   NSString *mixWebPath;
 @property (nonatomic, copy)   NSString *mixImageLowResPath;
@@ -31,7 +32,7 @@
     ALUserModel *userModel;
     NSDictionary *userDictionary, *userMixCoverURLsDictionary, *mixCoverURLsDictionary;
     NSUInteger mixId, mixUserId = 0;
-    NSString *mixName, *mixPath, *mixWebPath, *mixImageLowResPath, *mixImageNormalResPath, *mixImageHighResPath;
+    NSString *mixName, *mixDescription, *mixPath, *mixWebPath, *mixImageLowResPath, *mixImageNormalResPath, *mixImageHighResPath;
     NSString *userName, *userPath, *userWebPath, *userLowResPath, *userNormalResPath, *userHighResPath;
     
     userDictionary = mixDictionary[@"user"];
@@ -59,6 +60,7 @@
     
     mixId = [ALCodingChallengeHelpers isValidValue:mixDictionary[@"id"]] ? [mixDictionary[@"id"] unsignedIntegerValue] : 0;
     mixName = mixDictionary[@"name"] ?: @"";
+    mixDescription = mixDictionary[@"description"] ?: @"";
     mixPath = mixDictionary[@"path"] ?: @"";
     mixWebPath = mixDictionary[@"web_path"] ?: @"";
     
@@ -74,6 +76,7 @@
     mixModel = [[ALMixModel alloc] initMixModelWithId:mixId
                                          mixUserModel:userModel
                                               mixName:mixName
+                                       mixDescription:mixDescription
                                               mixPath:mixPath
                                            mixWebPath:mixWebPath
                                    mixImageLowResPath:mixImageLowResPath
@@ -87,6 +90,7 @@
 - (instancetype)initMixModelWithId:(NSUInteger)mixId
                       mixUserModel:(ALUserModel *)mixUserModel
                            mixName:(NSString *)mixName
+                    mixDescription:(NSString *)mixDescription
                            mixPath:(NSString *)mixPath
                         mixWebPath:(NSString *)mixWebPath
                 mixImageLowResPath:(NSString *)lowResPath
@@ -98,6 +102,7 @@
         _mixId = mixId;
         _mixUserModel = mixUserModel;
         _mixName = mixName;
+        _mixDescription = mixDescription;
         _mixPath = mixPath;
         _mixWebPath = mixWebPath;
         _mixImageLowResPath = lowResPath;

@@ -22,6 +22,7 @@
 		1857C0D21BEAD86F00B256AF /* ALMixCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0D11BEAD86F00B256AF /* ALMixCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		1857C0D51BEAD89000B256AF /* ALMixesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0D41BEAD89000B256AF /* ALMixesCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		1857C0D81BEAF73000B256AF /* ALUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1857C0D71BEAF73000B256AF /* ALUserModel.m */; settings = {ASSET_TAGS = (); }; };
+		1891710D1BEBD4B9009B6FC4 /* ALMixDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891710C1BEBD4B9009B6FC4 /* ALMixDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		55572BEC516A6BCA148CA5DD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7602DC6C2F8CB90C841A9EAE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,8 @@
 		1857C0D41BEAD89000B256AF /* ALMixesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALMixesCollectionViewController.m; path = CollectionViewControllers/ALMixesCollectionViewController.m; sourceTree = "<group>"; };
 		1857C0D61BEAF73000B256AF /* ALUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALUserModel.h; path = Models/ALUserModel.h; sourceTree = "<group>"; };
 		1857C0D71BEAF73000B256AF /* ALUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALUserModel.m; path = Models/ALUserModel.m; sourceTree = "<group>"; };
+		1891710B1BEBD4B9009B6FC4 /* ALMixDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALMixDetailViewController.h; path = ViewControllers/ALMixDetailViewController.h; sourceTree = "<group>"; };
+		1891710C1BEBD4B9009B6FC4 /* ALMixDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALMixDetailViewController.m; path = ViewControllers/ALMixDetailViewController.m; sourceTree = "<group>"; };
 		69E105E6FAB783671FC50719 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7602DC6C2F8CB90C841A9EAE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A115F064CA85BE8CF1EA5FE5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -93,10 +96,12 @@
 		1857C0821BE0243000B256AF /* ALCodingChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				18B6FD881BEBE596008FC36C /* InteractiveTransition */,
 				1857C0A81BE2FA4700B256AF /* Networking */,
 				1857C09B1BE2A4FE00B256AF /* CollectionViewControllers */,
 				1857C0CC1BEAD7B700B256AF /* CollectionViewControllerFlowLayouts */,
 				1857C0CB1BEAD7A300B256AF /* CollectionViewControllerCells */,
+				1891710A1BEBD48E009B6FC4 /* ViewControllers */,
 				1857C09A1BE2A4F800B256AF /* Models */,
 				1857C0861BE0243000B256AF /* AppDelegate.h */,
 				1857C0871BE0243000B256AF /* AppDelegate.m */,
@@ -171,6 +176,22 @@
 				1857C0CE1BEAD83400B256AF /* ALMixesCollectionViewFlowLayout.m */,
 			);
 			name = CollectionViewControllerFlowLayouts;
+			sourceTree = "<group>";
+		};
+		1891710A1BEBD48E009B6FC4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1891710B1BEBD4B9009B6FC4 /* ALMixDetailViewController.h */,
+				1891710C1BEBD4B9009B6FC4 /* ALMixDetailViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		18B6FD881BEBE596008FC36C /* InteractiveTransition */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = InteractiveTransition;
 			sourceTree = "<group>";
 		};
 		466D7C18599C803F4E6E67D0 /* Pods */ = {
@@ -312,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1857C0C31BE7D57600B256AF /* ALCodingChallengeConstants.m in Sources */,
+				1891710D1BEBD4B9009B6FC4 /* ALMixDetailViewController.m in Sources */,
 				1857C0B21BE304A100B256AF /* ALMixSetPageModel.m in Sources */,
 				1857C0D51BEAD89000B256AF /* ALMixesCollectionViewController.m in Sources */,
 				1857C0B51BE3057200B256AF /* ALMixModel.m in Sources */,
