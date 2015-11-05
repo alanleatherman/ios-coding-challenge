@@ -187,9 +187,10 @@
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
         [UIView animateWithDuration:1 delay:0.0 usingSpringWithDamping:.8 initialSpringVelocity:.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            cell.transform = CGAffineTransformMakeScale(1.5, 1.5);
+            cell.transform = CGAffineTransformMakeScale(kLongPressCenterCellMaxScale, kLongPressCenterCellMaxScale);
             cell.authorLabel.alpha = 0.0f;
             cell.nameLabel.alpha = 0.0f;
+            cell.layer.zPosition = 1.f;
         } completion:^(BOOL finished) {
         }];
     } else if (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled) {
@@ -197,6 +198,7 @@
             cell.transform = CGAffineTransformMakeScale(1, 1);
             cell.authorLabel.alpha = 1.0f;
             cell.nameLabel.alpha = 1.0f;
+            cell.layer.zPosition = 0.f;
         } completion:^(BOOL finished) {
         }];
     }
@@ -232,7 +234,7 @@
     
     NSLog(@"Percent To Scroll: %f", percentToScroll);
     
-    [UIView animateWithDuration:0.2f animations:^{
+    [UIView animateWithDuration:kMixSetNavigationBarBackgroundColorAnimationDuration animations:^{
         self.navigationController.view.backgroundColor = [UIColor colorWithRed:percentToScroll green:percentToScroll blue:percentToScroll alpha:1.f * percentToScroll];
     }];
         
