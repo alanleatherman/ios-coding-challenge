@@ -22,7 +22,7 @@
 #define kLoadPagePercentToScroll 0.13f
 
 
-@interface ALMixesCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
+@interface ALMixesCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
@@ -38,6 +38,11 @@
 @property (nonatomic, strong) ALMixesCollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong) ALMixSetPageModel *pageModel;
 @property (nonatomic, assign) BOOL isUpdatingPagination;
+
+@property (nonatomic, assign) NSTimeInterval centerCellSelectTime;
+@property (nonatomic, assign) BOOL isSelectingCenterCell;
+
+- (ALMixCollectionViewCell *)getMixCellForCurrentCenterIndexPath;
 
 @end
 
@@ -59,10 +64,15 @@
     self.collectionView.backgroundView.backgroundColor = [UIColor clearColor];
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressedCollectionView:)];
+    longPressGesture.minimumPressDuration = .2;
+    [self.collectionView addGestureRecognizer:longPressGesture];
+    
     self.flowLayout = [[ALMixesCollectionViewFlowLayout alloc] init];
     [self.collectionView setCollectionViewLayout:self.flowLayout
                                         animated:YES];
     
+    self.centerCellSelectTime = 0.0f;
     self.userImageView.clipsToBounds = YES;
 
     NSURL *mixesURL = [NSURL URLWithString:mixesURLString];
@@ -150,7 +160,44 @@
     NSLog(@"Selected %@", indexPath);
 }
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - Collection View Helper Methods
+
+- (ALMixCollectionViewCell *)getMixCellForCurrentCenterIndexPath {
+    NSIndexPath *centerIndexPath = [self getIndexPathForCenterMixCell];
+    ALMixCollectionViewCell *centerCell = (ALMixCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:centerIndexPath];
+    
+    return centerCell;
+}
+
+- (NSIndexPath *)getIndexPathForCenterMixCell {
+    CGPoint centerPoint = CGPointMake(self.flowLayout.screenSize.width / 2 + self.collectionView.contentOffset.x, self.flowLayout.screenSize.width / 2 + self.collectionView.contentOffset.y);
+    NSIndexPath *centerIndexPath = [self.collectionView indexPathForItemAtPoint:centerPoint];
+
+    return centerIndexPath;
+}
+
+#pragma mark - Handle Collection View Gestures
+
+- (void)longPressedCollectionView:(UILongPressGestureRecognizer *)gesture {
+    ALMixCollectionViewCell *cell = [self getMixCellForCurrentCenterIndexPath];
+    NSIndexPath *centerPath = [self getIndexPathForCenterMixCell];
+    UICollectionViewLayoutAttributes *attributes = [self.collectionView layoutAttributesForItemAtIndexPath:centerPath];
+    
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        [UIView animateWithDuration:1 delay:0.0 usingSpringWithDamping:.8 initialSpringVelocity:.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            cell.transform = CGAffineTransformMakeScale(2, 2);
+            cell.authorLabel.alpha = 0.0f;
+            cell.nameLabel.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+        }];
+    } else if (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled) {
+        [UIView animateWithDuration:0.2 delay:0.0 usingSpringWithDamping:.8 initialSpringVelocity:.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            cell.transform = CGAffineTransformMakeScale(1, 1);
+            cell.authorLabel.alpha = 1.0f;
+            cell.nameLabel.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+        }];
+    }
 }
 
 #pragma mark - ScrollViewDelegate methods
@@ -158,9 +205,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     NSLog(@"Scrolled: %@ of ContentSize: %@", NSStringFromCGPoint(scrollView.contentOffset), NSStringFromCGSize(scrollView.contentSize));
     
-    CGPoint centerPoint = CGPointMake(self.flowLayout.screenSize.width / 2 + scrollView.contentOffset.x, self.flowLayout.screenSize.width / 2 + scrollView.contentOffset.y);
-    NSIndexPath *centerIndexPath = [self.collectionView indexPathForItemAtPoint:centerPoint];
-    ALMixCollectionViewCell *centerCell = (ALMixCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:centerIndexPath];
+    NSIndexPath *centerIndexPath = [self getIndexPathForCenterMixCell];
+    ALMixCollectionViewCell *centerCell = [self getMixCellForCurrentCenterIndexPath];
     
     // Dont set for 0 because will set when retrieving data model initially
     if (self.centerMixCell != centerCell && centerIndexPath != 0) {
