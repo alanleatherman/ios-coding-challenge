@@ -51,7 +51,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"Coding Challenge", @"Navigation Title for Mixes CollectionVC");
+    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"ALCodingChallenge", @"Navigation Title for Mixes CollectionVC");
+    self.navigationController.navigationBar.translucent = YES;
+    
+    self.navigationController.view.backgroundColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.f];
+    
     self.collectionView.backgroundView.backgroundColor = [UIColor clearColor];
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     
@@ -179,6 +183,8 @@
     self.blurEffectViewBottomConstraint.constant = constraintValue;
     
     NSLog(@"Percent To Scroll: %f", percentToScroll);
+    
+    self.navigationController.view.backgroundColor = [UIColor colorWithRed:percentToScroll green:percentToScroll blue:percentToScroll alpha:1.f * percentToScroll];
     
     if (self.isUpdatingPagination == NO && percentToScroll < kLoadPagePercentToScroll) {
         [self fetchNextPage];
