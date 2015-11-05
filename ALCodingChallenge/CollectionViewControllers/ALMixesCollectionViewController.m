@@ -31,6 +31,7 @@
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *blurEffectViewTopConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *blurEffectViewBottomConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *userImageBottomConstraint;
 
 @property (nonatomic, strong) ALMixesCollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong) ALMixSetPageModel *pageModel;
@@ -74,6 +75,10 @@
     
     self.centerCellSelectTime = 0.0f;
     self.userImageView.clipsToBounds = YES;
+    
+    if (self.flowLayout.screenSize.height <= 667) {
+        self.userImageBottomConstraint.constant = self.userImageBottomConstraint.constant + kUserImageSmallScreenBottomConstraint;
+    }
 
     NSURL *mixesURL = [NSURL URLWithString:mixesURLString];
     
@@ -183,7 +188,6 @@
 - (void)longPressedCollectionView:(UILongPressGestureRecognizer *)gesture {
     ALMixCollectionViewCell *cell = [self getMixCellForCurrentCenterIndexPath];
     NSIndexPath *centerPath = [self getIndexPathForCenterMixCell];
-    UICollectionViewLayoutAttributes *attributes = [self.collectionView layoutAttributesForItemAtIndexPath:centerPath];
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
         [UIView animateWithDuration:1 delay:0.0 usingSpringWithDamping:.8 initialSpringVelocity:.8 options:UIViewAnimationOptionCurveEaseOut animations:^{

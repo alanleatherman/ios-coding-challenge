@@ -8,8 +8,12 @@
 
 #import "ALMixesCollectionViewFlowLayout.h"
 
-#define kCellWidth 225.f
-#define kCellHeight 300.f
+#define kDefaultCellWidth 225.f
+#define kDefaultCellHeight 300.f
+
+#define kSmallerCellWidth 
+#define kSmallerCellHeight
+
 
 @interface ALMixesCollectionViewFlowLayout ()
 
@@ -29,7 +33,6 @@
     if (self = [super init]) {
         self.minimumInteritemSpacing = 25;
         self.minimumLineSpacing = 25;
-        self.itemSize = CGSizeMake(kCellWidth, kCellHeight);
         self.sectionInset = UIEdgeInsetsMake(50, 0, 0, 0);
         
         _dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
@@ -37,10 +40,11 @@
         
         _screenSize = [[UIScreen mainScreen] bounds].size;
         
-        _centerCellRect = CGRectMake((_screenSize.width - kCellWidth) / 2,
+        self.itemSize = CGSizeMake(kDefaultCellWidth, kDefaultCellHeight);
+        _centerCellRect = CGRectMake((_screenSize.width - kDefaultCellWidth) / 2,
                                      _screenSize.height / 4,
-                                     kCellWidth,
-                                     kCellHeight);
+                                     kDefaultCellWidth,
+                                     kDefaultCellHeight);
         
         
         [self setScrollDirection:UICollectionViewScrollDirectionHorizontal];

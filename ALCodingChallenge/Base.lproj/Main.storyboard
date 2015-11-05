@@ -190,6 +190,7 @@
                         <outlet property="blurEffectViewTopConstraint" destination="11H-cW-p0U" id="zkH-5P-9kL"/>
                         <outlet property="collectionView" destination="DXG-gy-gbf" id="EOj-T6-fbu"/>
                         <outlet property="userImageActivityIndicatorView" destination="SMU-vB-kkG" id="yku-2L-Vig"/>
+                        <outlet property="userImageBottomConstraint" destination="OvJ-GP-bxs" id="j4o-PJ-eUt"/>
                         <outlet property="userImageView" destination="dOY-3Y-x5A" id="35f-Ty-b1n"/>
                     </connections>
                 </viewController>

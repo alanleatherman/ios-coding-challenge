@@ -14,6 +14,7 @@
 #define kDefaultBlurEffectViewConstraint 55.f
 #define kLoadPagePercentToScroll 0.3f
 #define kLongPressCenterCellMaxScale 1.5
+#define kUserImageSmallScreenBottomConstraint 45.f
 
 extern NSString * const mixesURLString;
 extern NSString * const baseURLString;
