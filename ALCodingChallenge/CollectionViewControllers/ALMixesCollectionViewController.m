@@ -29,6 +29,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *userImageView;
 @property (nonatomic, weak) IBOutlet UIVisualEffectView *blurEffectView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *userImageActivityIndicatorView;
 @property (nonatomic, weak) ALMixCollectionViewCell *centerMixCell;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *blurEffectViewTopConstraint;
@@ -36,6 +37,7 @@
 
 @property (nonatomic, strong) ALMixesCollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong) ALMixSetPageModel *pageModel;
+@property (nonatomic, assign) BOOL isUpdatingPagination;
 
 @end
 
@@ -81,7 +83,11 @@
 
                                    dispatch_async(dispatch_get_main_queue(), ^{
                                        [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixImageNormalResPath]];
-                                       [self.userImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixUserModel.userImageNormalResPath]];
+                                       
+                                       [self.userImageActivityIndicatorView startAnimating];
+                                       [self.userImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixUserModel.userImageNormalResPath] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                           [self.userImageActivityIndicatorView stopAnimating];
+                                       }];
                                        
                                        [self.collectionView reloadData];
                                    });
@@ -123,19 +129,6 @@
         }];
     }
     
-    /*
-    NSInteger colorInteger = arc4random_uniform(4);
-    if (colorInteger == 0) {
-        cell.backgroundColor = [UIColor blueColor];
-    } else if (colorInteger == 1) {
-        cell.backgroundColor = [UIColor redColor];
-    } else if (colorInteger == 2) {
-        cell.backgroundColor = [UIColor greenColor];
-    } else {
-        cell.backgroundColor = [UIColor yellowColor];
-    }
-     */
-    
     return cell;
 }
 
@@ -170,7 +163,11 @@
         ALMixModel *mixModel = self.pageModel.mixSetArray[centerIndexPath.row];
         self.centerMixCell = centerCell;
         [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixImageNormalResPath]];
-        [self.userImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixUserModel.userImageNormalResPath]];
+        
+        [self.userImageActivityIndicatorView startAnimating];
+        [self.userImageView sd_setImageWithURL:[NSURL URLWithString:mixModel.mixUserModel.userImageNormalResPath] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [self.userImageActivityIndicatorView stopAnimating];
+        }];
     }
     
     
@@ -183,8 +180,9 @@
     
     NSLog(@"Percent To Scroll: %f", percentToScroll);
     
-    if (percentToScroll < kLoadPagePercentToScroll) {
+    if (self.isUpdatingPagination == NO && percentToScroll < kLoadPagePercentToScroll) {
         [self fetchNextPage];
+        self.isUpdatingPagination = YES;
     }
 }
 
@@ -214,6 +212,7 @@
                                        self.flowLayout.cellCount = self.pageModel.mixSetArray.count;
                                        
                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                           self.isUpdatingPagination = NO;
                                            [self.collectionView reloadData];
                                        });
                                    } else {

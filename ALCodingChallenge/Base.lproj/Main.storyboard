@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7ck-qV-6qg">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Coding Challenge-->
@@ -63,7 +64,7 @@
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vRx-aX-jYM">
                                                     <rect key="frame" x="103" y="140" width="20" height="20"/>
                                                 </activityIndicatorView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Author" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGy-8l-esG">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGy-8l-esG">
                                                     <rect key="frame" x="0.0" y="271" width="225" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="hc5-yJ-66O"/>
@@ -78,7 +79,7 @@
                                                         <constraint firstAttribute="height" constant="225" id="cw4-eY-Idi"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Mix Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZl-Gr-FFq">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mix Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZl-Gr-FFq">
                                                     <rect key="frame" x="0.0" y="227" width="225" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -102,6 +103,7 @@
                                             <constraint firstItem="vRx-aX-jYM" firstAttribute="centerX" secondItem="uct-Jd-1Mw" secondAttribute="centerX" id="g5F-tq-nxc"/>
                                             <constraint firstAttribute="trailing" secondItem="NGy-8l-esG" secondAttribute="trailing" id="h0l-SK-FvU"/>
                                             <constraint firstAttribute="bottom" secondItem="wZl-Gr-FFq" secondAttribute="bottom" constant="23" id="hDM-UD-mc4"/>
+                                            <constraint firstItem="NGy-8l-esG" firstAttribute="bottom" secondItem="uct-Jd-1Mw" secondAttribute="bottomMargin" id="lWG-9U-2Tk"/>
                                             <constraint firstItem="wZl-Gr-FFq" firstAttribute="leading" secondItem="uct-Jd-1Mw" secondAttribute="leading" id="p6M-Si-gPL"/>
                                             <constraint firstItem="NGy-8l-esG" firstAttribute="top" secondItem="7gz-Uu-mZE" secondAttribute="bottom" constant="5" id="wuK-9Y-TD5"/>
                                             <constraint firstAttribute="trailing" secondItem="wZl-Gr-FFq" secondAttribute="trailing" id="y2f-Ld-Kc4"/>
@@ -129,6 +131,13 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="1G1-Oe-55s" userLabel="Activity Indicator">
                                 <rect key="frame" x="282" y="281" width="37" height="37"/>
                             </activityIndicatorView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="SMU-vB-kkG">
+                                <rect key="frame" x="290" y="477" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="FxA-KM-CkD"/>
+                                    <constraint firstAttribute="width" constant="20" id="quB-KR-pFm"/>
+                                </constraints>
+                            </activityIndicatorView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Funkoscope" translatesAutoresizingMaskIntoConstraints="NO" id="dOY-3Y-x5A">
                                 <rect key="frame" x="263" y="449" width="75" height="75"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -155,11 +164,13 @@
                             <constraint firstItem="EPj-Km-rcG" firstAttribute="top" secondItem="DXG-gy-gbf" secondAttribute="bottom" constant="56" id="OW7-by-DMd"/>
                             <constraint firstItem="dOY-3Y-x5A" firstAttribute="bottom" secondItem="DXG-gy-gbf" secondAttribute="bottom" constant="-20" id="OvJ-GP-bxs"/>
                             <constraint firstItem="tX7-12-dPp" firstAttribute="bottom" secondItem="geO-19-QZi" secondAttribute="bottom" id="Rwv-OG-y0f"/>
+                            <constraint firstItem="SMU-vB-kkG" firstAttribute="centerX" secondItem="dOY-3Y-x5A" secondAttribute="centerX" id="Y8L-Z3-IIe"/>
                             <constraint firstItem="1G1-Oe-55s" firstAttribute="centerY" secondItem="rwR-8n-qaZ" secondAttribute="centerY" id="gI6-JT-f2i"/>
                             <constraint firstItem="DXG-gy-gbf" firstAttribute="top" secondItem="rwR-8n-qaZ" secondAttribute="top" constant="100" id="iFm-ZC-gIb"/>
                             <constraint firstItem="EPj-Km-rcG" firstAttribute="top" secondItem="dOY-3Y-x5A" secondAttribute="bottom" constant="50" id="kdF-Tk-gEg"/>
                             <constraint firstItem="1G1-Oe-55s" firstAttribute="centerX" secondItem="rwR-8n-qaZ" secondAttribute="centerX" id="lRT-4T-de4"/>
                             <constraint firstItem="EPj-Km-rcG" firstAttribute="top" secondItem="geO-19-QZi" secondAttribute="bottom" constant="55" id="n1A-wV-9Tr" userLabel="BlurEffectBottom"/>
+                            <constraint firstItem="SMU-vB-kkG" firstAttribute="centerY" secondItem="dOY-3Y-x5A" secondAttribute="centerY" id="nIa-C9-Ibb"/>
                             <constraint firstItem="tX7-12-dPp" firstAttribute="top" secondItem="geO-19-QZi" secondAttribute="top" id="oqb-cf-YLq"/>
                             <constraint firstAttribute="trailing" secondItem="DXG-gy-gbf" secondAttribute="trailing" id="wP1-sR-7SV"/>
                             <constraint firstAttribute="trailing" secondItem="tX7-12-dPp" secondAttribute="trailing" id="wV3-CO-YTJ"/>
@@ -178,6 +189,7 @@
                         <outlet property="blurEffectViewBottomConstraint" destination="n1A-wV-9Tr" id="I9r-Pw-Wou"/>
                         <outlet property="blurEffectViewTopConstraint" destination="11H-cW-p0U" id="zkH-5P-9kL"/>
                         <outlet property="collectionView" destination="DXG-gy-gbf" id="EOj-T6-fbu"/>
+                        <outlet property="userImageActivityIndicatorView" destination="SMU-vB-kkG" id="yku-2L-Vig"/>
                         <outlet property="userImageView" destination="dOY-3Y-x5A" id="35f-Ty-b1n"/>
                     </connections>
                 </viewController>
